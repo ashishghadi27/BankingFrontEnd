@@ -1,0 +1,47 @@
+<form class="form-horizontal" style="padding-top: 100px; margin-left:30%;">
+
+    <div>
+        <label style= "margin-left: 10%; font: outline; font-size: 30px; font-style:bold;  border: 4px solid black;padding-left: 0.5px; padding-left: 10px; padding-right: 10px; padding-bottom: 1px;"><strong>Initiate NEFT Paymet</strong></label> <br><br>
+     </div> 
+
+    <div style="margin-top: 5px; margin-bottom: 10px;">
+        <label for="fromAcc" class="control-label col-sm-3">From Account</label>
+        <input type="text" id="senderAccNumber" size="30"/> 
+    </div>
+
+    <div style="display: inline; margin-top: 10px;"> 
+        <label for="toAcc" class="control-label col-sm-3">To Account</label>
+        <input type="text" id="recieverAccNumber"  size="30" style="margin-right: 5px;"/> 
+        <input type="button" value=" + Add" style="border: 0.5px solid;"/>
+    </div>
+
+    <div style="margin-top: 10px;" >
+        <label for="ammount" class="control-label col-sm-3">Ammount</label>
+        <input type="text" id="ammount"  size="30"/>
+    </div>
+
+
+    <div style="margin-top: 10px;">
+        <label for="transactionDate" class="control-label col-sm-3">Transaction Date</label>
+        <input id="transactionDate"  size="30" readonly=true />  
+    </div>
+    
+
+    <div style="margin-top: 10px;">
+        <label for="remark" class="control-label col-sm-3">Remark</label>
+        <input type="text" id="remark"  size="30" />  <br><br>
+    </div>
+
+    <div style="font-style: italic; padding-right: 40%; font-size: small;" >
+        <p>Please note: <br>
+        1. Transaction will be executede on the next working day if they are scheduled for Sunday, National Holidays, NEFT Holidays (declare by RBI).<br>
+        2. Timing for NEFT : Monday-Saturday(except 2nd and 4th Saturday) 6:00 AM - 6:30 PM </p>
+    </div> <br>
+
+    <div>
+        <input style="margin-left: 5px; border: 0.5px solid;" type="button" id="saveIMPS" value="Save"/>
+        <input  style="margin-left: 5px; border: 0.5px solid;" type="button" id="resetIMPS" value="Reset"/>
+        <input style="margin-left: 5px; border: 0.5px solid;"  type="button" id="saveTemplate" value="Save as Template"/>
+        <input type="button" id="continueIMPS" value="Continue" style="margin-left: 155px; border: 0.5px solid;"/>
+    </div>
+</form>
