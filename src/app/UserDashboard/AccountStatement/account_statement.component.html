@@ -1,0 +1,81 @@
+<div class="container">
+    <br>
+    <h3 style="text-align: center;">Account Statement</h3>
+    <br/>
+    <form class="form" action="">
+        <div>
+            Statement from  <input type="date" name="stmtStartDate">  To  <input type="date" name="stmtEndDate">
+        </div>
+        <br/>
+        <div>
+            <table class="table borderTable">
+                <thead class="thead"> 
+                    <tr>
+                        <th>Select</th>
+                        <th>Account Number</th>
+                        <th>Name</th>
+                        <th>Account Type</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr *ngFor="let account of accounts"> -->
+                    <tr>
+                        <td>
+                            <input type="radio" value="1" id="1" name="selectAccount" class="radio">
+                        </td>
+                        <td>1234598054</td>
+                        <td>Mahima Parmar</td>
+                        <td>Current Account</td>
+                        <td>&#x20B9;23,300</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" value="2" id="2" name="selectAccount" class="radio">
+                        </td>
+                        <td>2356398054</td>
+                        <td>Mahima Parmar</td>
+                        <td>Savings Account</td>
+                        <td>&#x20B9;56,300</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="center">
+            <input type="submit" class="submit">
+        </div>
+    </form>
+    <br/>
+    <div *ngIf=true>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Reason</th>
+                    <th>Transaction Id</th>
+                    <th>Transaction Type</th>
+                    <th>Amount</th>
+                    <th>Credit/Debit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2020/10/23</td>
+                    <td>Something</td>
+                    <td>2342</td>
+                    <td>IMPS</td>
+                    <td>&#x20B9;1,200</td>
+                    <td>Credit</td>
+                </tr>
+                <tr>
+                    <td>2020/10/12</td>
+                    <td>Something Prequel</td>
+                    <td>3451</td>
+                    <td>Neft</td>
+                    <td>&#x20B9;800</td>
+                    <td>Debit</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
