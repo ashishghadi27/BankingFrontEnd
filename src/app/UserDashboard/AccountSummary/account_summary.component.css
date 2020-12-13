@@ -1,0 +1,19 @@
+.header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 0px;
+    padding-left: 0px;
+    background-color: #EF9A9A;
+}
+
+h3 {
+    text-align: center;
+}
+
+thead {
+    background-color: #FFCDD2;
+}
+
+tbody {
+    background-color: #FFEBEE;
+}

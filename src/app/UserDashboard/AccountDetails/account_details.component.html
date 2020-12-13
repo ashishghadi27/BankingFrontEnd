@@ -1,69 +1,56 @@
-<div>
+<div *ngIf="dataFetched">
+    <div class="header">
+        <h3>Account Details</h3>
+    </div>
     <br>
-    <h3 style="text-align: center;">Account Details</h3>
-    <br>
-    <table>
+    <table class="first">
         <tr>
             <td>Full Name :</td>
-            <td>Mahima Parmar</td>
+            <td>{{fullName}}</td>
         </tr>
-        <br>
         <tr>
             <td>Father's Name :</td>
-            <td>Bharat Parmar</td>
+            <td>{{accountDetails.user.fatherName}}</td>
         </tr>
-        <br>
         <tr>
             <td>Date of Birth :</td>
-            <td>2000/12/02</td>
+            <td>{{dob}}</td>
         </tr>
-        <br>
         <tr>
             <td>Contact Number :</td>
-            <td>+91 3583225742</td>
+            <td>{{accountDetails.user.mobileNo}}</td>
         </tr>
-        <br>
-        <tr>
-            <td>Full Name :</td>
-            <td>Mahima Parmar</td>
-        </tr>
-        <br>
         <tr>
             <td>Email Id :</td>
-            <td>mahima@gmail.com</td>
+            <td>{{accountDetails.user.email}}</td>
         </tr>
-        <br>
         <tr>
             <td>Aadhaar Card Number :</td>
-            <td>3465 3467 3456 7564</td>
+            <td>{{accountDetails.user.aadhar}}</td>
         </tr>
-        <br>
         <tr>
             <td style="vertical-align: top;">Residential Address :</td>
-            <td>101, Society Name, Landmark,<br>
-                Street Name, Area,<br>
-                City - 400 067, <br>
-                State, <br>
-                Country.</td>
+            <td>{{accountDetails.residentialAddress.line1}}<br>
+                {{accountDetails.residentialAddress.line2}}<br>
+                {{accountDetails.residentialAddress.city.cityName}} - {{accountDetails.residentialAddress.pincode}} <br>
+                {{accountDetails.residentialAddress.state.stateName}} <br>
+                {{accountDetails.residentialAddress.state.country.countryName}}</td>
         </tr>
-        <br>
         <tr>
             <td style="vertical-align: top;">Permanent Address :</td>
-            <td>101, Society Name, Landmark,<br>
-                Street Name, Area,<br>
-                City - 400 067, <br>
-                State, <br>
-                Country.</td>
+            <td>{{accountDetails.permanentAddress.line1}}<br>
+                {{accountDetails.permanentAddress.line2}}<br>
+                {{accountDetails.permanentAddress.city.cityName}} - {{accountDetails.permanentAddress.pincode}} <br>
+                {{accountDetails.permanentAddress.state.stateName}} <br>
+                {{accountDetails.permanentAddress.state.country.countryName}}</td>
         </tr>
-        <br>
         <tr>
             <td>Occupation Type :</td>
-            <td>Employment</td>
+            <td>{{accountDetails.occupation.occupationType}}</td>
         </tr>
-        <br>
         <tr>
             <td>Source of Income :</td>
-            <td>Something</td>
+            <td>{{accountDetails.occupation.sourceOfIncome}}</td>
         </tr>
     </table>
 </div>
