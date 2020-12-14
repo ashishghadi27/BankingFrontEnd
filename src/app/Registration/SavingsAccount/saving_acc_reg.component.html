@@ -1,14 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" style="color: white; font-weight: 700;" href="#">Bank Name</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto ">
+        <li class="nav-item active">
+          <a class="nav-link" style="color: white; font-weight: 700;" href="#">Register For Internet Banking <span class="sr-only">(current)</span></a>
+        </li>
+
+      </ul>
+    </div>
+</nav>
+<div class="personaldet">
+	<h3 style="text-align: center; padding: 10px; color: white; font-weight: 700;">Personal Details</h3>
+</div>
 <div *ngIf="datafetched">
-	<h2 style="border:1px solid black;text-align: center;">Open a savings Account</h2>
-	<h3 style="border:1px solid black;text-align: center;">Personal Details</h3>
 	<div>
 	<form [formGroup]="registerForm" (ngSubmit)="register()">
 	<div class="row">
 		<div class="col-6" style="padding:0px 0px 0px 400px">
-			<label>Title*</label>&nbsp;&nbsp;&nbsp;
+			<label>Title<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-6">
-			<select name="title">
+			<select name="title" (change)="setTitle($event)">
 				<option value="Ms.">Ms.</option>
 				<option value="Mrs.">Mrs.</option>
 				<option value="Mr.">Mr.</option>
@@ -17,7 +33,7 @@
 	</div>
 	<div class="row">
 		<div class="col-6" style="padding:0px 0px 0px 400px">
-			<label>First Name*</label>&nbsp;&nbsp;&nbsp;
+			<label>First Name<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-6">
 			<input type="text" placeholder="Enter First name" name="firstname" [formControl]="firstname" required/><br>
@@ -25,7 +41,7 @@
 		</div>
 	</div><div class="row">
 		<div class="col-6" style="padding:0px 0px 0px 400px">
-			<label>Middle Name*</label>&nbsp;&nbsp;&nbsp;
+			<label>Middle Name<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-6">
 			<input type="text" placeholder="Enter Middle name" name="middlename" [formControl]="middlename"/><br>	
@@ -34,7 +50,7 @@
 	</div>
 	<div class="row">
 		<div class="col-6" style="padding:0px 0px 0px 400px">
-			<label>Last Name*</label>&nbsp;&nbsp;&nbsp;
+			<label>Last Name<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-6">
 			<input type="text" placeholder="Enter Last name" name="lastname" [formControl]="lastname"/><br>	
@@ -46,12 +62,12 @@
 			<label>Father's Name</label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-6">
-			<input type="text" placeholder="Enter Father's name" name="fathername"/><br>	
+			<input type="text" placeholder="Enter Father's name" name="fathername" [formControl]="fathername"/><br>	
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-6" style="padding:0px 0px 0px 400px">
-			<label>Mobile No.*</label>&nbsp;&nbsp;&nbsp;
+			<label>Mobile No.<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-6">
 			<input type="text" placeholder="Enter Mobile No." name="mobileno" [formControl]="mobileno"/><br>	
@@ -62,7 +78,7 @@
 	</div>
 	<div class="row">
 		<div class="col-6" style="padding:0px 0px 0px 400px">
-			<label>Email ID*</label>&nbsp;&nbsp;&nbsp;
+			<label>Email ID<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-6">
 			<input type="text" placeholder="Enter Email Id" name="email" [formControl]="emailId"/><br>	
@@ -71,7 +87,7 @@
 	</div>
 	<div class="row">
 		<div class="col-6" style="padding:0px 0px 0px 400px">
-			<label>Aadhar No.*</label>&nbsp;&nbsp;&nbsp;
+			<label>Aadhar No.<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-6">
 			<input type="text" placeholder="Enter Aadhar No." name="aadhar" [formControl]="aadharno"/><br>	
@@ -80,32 +96,33 @@
 	</div>
 	<div class="row">
 		<div class="col-6" style="padding:0px 0px 0px 400px">
-			<label>Date of Birth*</label>&nbsp;&nbsp;&nbsp;
+			<label>Date of Birth<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-6">
 			<input type="date" name="dob" [formControl]="dob"/><br>	
-			<span *ngIf="!dob.valid && dob.dirty" class="text-danger">Date of Birth required!!</span>
+			<!--<span *ngIf="!dob.valid && dob.dirty" class="text-danger">Date of Birth required!!</span>-->
 		</div>
 	</div>
-	<div class="row">
+	<hr>
+	<div class="row" style="margin-top: 10px; margin-bottom: 10px;">
 		<div class="col-6" style="padding:0px 0px 0px 400px">
-			<label>Residential Address</label>&nbsp;&nbsp;&nbsp;
+			<label>Residential Address:</label>&nbsp;&nbsp;&nbsp;
 		</div>		
 	</div>
 	<div class="row">
 		<div class="col-1"></div>
 		<div class="col-5" style="padding:0px 0px 0px 400px">
-			<label>Line1*</label>&nbsp;&nbsp;&nbsp;
+			<label>Line 1<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-5">
-			<input type="text" placeholder="Line1" name="Rline1" [formControl]="Rline1"/><br>	
-			<span *ngIf="!Rline1.valid && Rline1.dirty" class="text-danger">Line1 required!!</span>
+			<input type="text" placeholder="Line1" name="Rline1" [formControl]="Rline1Control"/><br>	
+			<span *ngIf="!Rline1Control.valid && Rline1Control.dirty" class="text-danger">Line1 required!!</span>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-1"></div>
 		<div class="col-5" style="padding:0px 0px 0px 400px">
-			<label>Line2*</label>&nbsp;&nbsp;&nbsp;
+			<label>Line 2<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-5">
 			<input type="text" placeholder="Line2" name="Rline2" [formControl]="Rline2"/><br>	
@@ -118,16 +135,17 @@
 			<label>LandMark</label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-5">
-			<input type="text" placeholder="LandMark" name="Rlandmark"/><br>	
+			<input type="text" placeholder="LandMark" [formControl] = "rLandmark" name="Rlandmark"/><br>	
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-1"></div>
 		<div class="col-5" style="padding:0px 0px 0px 400px">
-			<label>State*</label>&nbsp;&nbsp;&nbsp;
+			<label>State<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-5">
 			<select name="Rstate" (change)="selectChangeHandler($event)">
+				<option value="select">--Select--</option>
 				<option *ngFor="let s of restStateTemplate.stateList" [ngValue]="s.stateId" value="{{s.stateId}}">{{s.stateName}}</option>
 			</select>	
 		</div>
@@ -135,10 +153,11 @@
 	<div class="row">
 		<div class="col-1"></div>
 		<div class="col-5" style="padding:0px 0px 0px 400px">
-			<label>City*</label>&nbsp;&nbsp;&nbsp;
+			<label>City<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-5">
-			<select name="Rcity">
+			<select name="Rcity" [disabled]="butDisabled">
+				<option>--Select--	</option>
 				<option *ngFor="let c of restCityTemplate.cityList" [ngValue]="c.cityId" value="{{c.cityId}}">{{c.cityName}}</option>
 			</select>	
 		</div>
@@ -146,7 +165,7 @@
 	<div class="row">
 		<div class="col-1"></div>
 		<div class="col-5" style="padding:0px 0px 0px 400px">
-			<label>Pincode*</label>&nbsp;&nbsp;&nbsp;
+			<label>Pincode<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-5">
 			<input type="text" placeholder="Pincode" name="RPincode" [formControl]="Rpincode"/><br>	
@@ -154,18 +173,19 @@
 		</div>
 	</div>
 	<div class="row">
+		<div class="col d-inline" style="text-align: center;">
+			<input type="checkbox" class="d-inline" name="sameadd" [checked]="false" (change)="isPerma()"/>
+			<label class="d-inline">Permanent Address same as Residential Address</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+	</div>
+	<hr>
+	<div  *ngIf="!isPermanent" class="row">
 		<div class="col-6" style="padding:0px 0px 0px 400px">
 			<label>Permanent Address</label>&nbsp;&nbsp;&nbsp;
 		</div>		
 	</div>
-	<div class="row">
-		<div class="col-1"></div>
-		<div class="col-6" style="padding:0px 0px 0px 300px">
-			<input type="checkbox" name="sameadd"/>
-			<label>Permanent Address same as Residential Address</label>&nbsp;&nbsp;&nbsp;
-		</div>		
-	</div>
-	<div class="row">
+	
+	<div *ngIf="!isPermanent" class="row">
 		<div class="col-1"></div>
 		<div class="col-5" style="padding:0px 0px 0px 400px">
 			<label>Line1*</label>&nbsp;&nbsp;&nbsp;
@@ -175,57 +195,60 @@
 			<span *ngIf="!Pline1.valid && Pline1.dirty" class="text-danger">Line1 required!!</span>
 		</div>
 	</div>
-	<div class="row">
+	<div *ngIf="!isPermanent" class="row">
 		<div class="col-1"></div>
 		<div class="col-5" style="padding:0px 0px 0px 400px">
-			<label>Line2*</label>&nbsp;&nbsp;&nbsp;
+			<label>Line 2<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-5">
 			<input type="text" placeholder="Line2" name="Pline2" [formControl]="Pline2"/><br>	
 			<span *ngIf="!Pline2.valid && Pline2.dirty" class="text-danger">Line2 required!!</span>
 		</div>
 	</div>
-	<div class="row">
+	<div *ngIf="!isPermanent" class="row">
 		<div class="col-1"></div>
 		<div class="col-5" style="padding:0px 0px 0px 400px">
 			<label>LandMark</label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-5">
-			<input type="text" placeholder="LandMark" name="Plandmark"/><br>	
+			<input type="text" placeholder="LandMark" [formControl] = "pLandmark" name="Plandmark"/><br>	
 		</div>
 	</div>
-	<div class="row">
+	<div *ngIf="!isPermanent" class="row">
 		<div class="col-1"></div>
 		<div class="col-5" style="padding:0px 0px 0px 400px">
-			<label>State*</label>&nbsp;&nbsp;&nbsp;
+			<label>State<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-5">
-			<select name="Pstate" (change)="selectChangeHandler($event)">
-				<option *ngFor="let s of restStateTemplate.stateList" [ngValue]="s.stateId" value="{{s.stateId}}">{{s.stateName}}</option>
+			<select name="Pstate" (change)="selectChangeHandlerSecond($event)">
+				<option>--Select--	</option>
+				<option *ngFor="let s of restStateTemplateSecond.stateList"  [ngValue]="s.stateId" value="{{s.stateId}}">{{s.stateName}}</option>
 			</select>	
 		</div>
 	</div>
-	<div class="row">
+	<div *ngIf="!isPermanent" class="row">
 		<div class="col-1"></div>
 		<div class="col-5" style="padding:0px 0px 0px 400px">
-			<label>City*</label>&nbsp;&nbsp;&nbsp;
+			<label>City<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-5">
-			<select name="Pcity">
-				<option *ngFor="let c of restCityTemplate.cityList" [ngValue]="c.cityId" value="{{c.cityId}}">{{c.cityName}}</option>
+			<select name="Pcity"  [disabled]="butDisabledTwo">
+				<option>--Select--	</option>
+				<option *ngFor="let city of restCityTemplateSecond.cityList" [ngValue]="city.cityId" value="{{city.cityId}}">{{city.cityName}}</option>
 			</select>	
 		</div>
 	</div>
-	<div class="row">
+	<div  *ngIf="!isPermanent" class="row">
 		<div class="col-1"></div>
 		<div class="col-5" style="padding:0px 0px 0px 400px">
-			<label>Pincode*</label>&nbsp;&nbsp;&nbsp;
+			<label>Pincode<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-5">
 			<input type="text" placeholder="Pincode" name="PPincode" [formControl]="Ppincode"/><br>	
 			<span *ngIf="!Ppincode.valid && Ppincode.dirty" class="text-danger">Valid Pincode required!!</span>
 		</div>
 	</div>
+	<hr>
 	<div class="row">
 		<div class="col-6" style="padding:0px 0px 0px 400px">
 			<label>Occupation Details</label>&nbsp;&nbsp;&nbsp;
@@ -234,7 +257,7 @@
 	<div class="row">
 		<div class="col-1"></div>
 		<div class="col-5" style="padding:0px 0px 0px 400px">
-			<label>Occupation Type*</label>&nbsp;&nbsp;&nbsp;
+			<label>a) Occupation Type<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-5">
 			<select name="occ_type" [formControl]="occtype">
@@ -250,7 +273,7 @@
 	<div class="row">
 		<div class="col-1"></div>
 		<div class="col-5" style="padding:0px 0px 0px 400px">
-			<label>b)Source of Income*</label>&nbsp;&nbsp;&nbsp;
+			<label>b) Source of Income<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-5">
 			<select name="src_income" [formControl]="srcincome">
@@ -264,7 +287,7 @@
 	<div class="row">
 		<div class="col-1"></div>
 		<div class="col-5" style="padding:0px 0px 0px 400px">
-			<label>c)Gross Annual Income*</label>&nbsp;&nbsp;&nbsp;
+			<label>c) Gross Annual Income<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-5">
 			<select name="annualIncome" [formControl]="annualIncome">
@@ -274,6 +297,7 @@
 			</select>	
 		</div>
 	</div>
+	<hr>
 	<div class="row">
 		<div class="col-1"></div>
 		<div class="col-6" style="padding:0px 0px 0px 300px">
@@ -296,10 +320,8 @@
 		</div>		
 	</div>
 	<div>
-		<div class="row">
-			<div class="col-4"></div>
-			<div class="col-8" style="padding:0px 0px 0px 150px">
-				<br>
+		<div class="row d-flex justify-content-center">
+			<div class="col d-flex justify-content-center">
 				<input class="btn btn-success" type="submit" value="Submit">
 			</div>		
 		</div>

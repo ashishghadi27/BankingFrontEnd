@@ -12,17 +12,18 @@ import { DashboardService } from '../DashboardService/dashboard.service';
 export class AccountSummary{
 
     dataFetched : boolean = false;
+    userId : number;
 
     ngOnInit() : void {
         this.getSummary();
     }
 
     constructor(private dashboardService : DashboardService) {
-
+        this.userId = this.dashboardService.getUserId();
     }
 
 
-    userId : number = 3;
+    
     summary : SummaryModel;
 
     getSummary() : void {

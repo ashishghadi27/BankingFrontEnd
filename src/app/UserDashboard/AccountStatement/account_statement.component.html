@@ -1,10 +1,10 @@
 <div *ngIf="dataFetched">
     <div class="header">
-        <h3>Account Statement</h3>
+        <h3 style="font-weight: 700;">Account Statement</h3>
     </div>
     <br>
     <div class="first">
-        <table class="table">
+        <table class="table table-striped">
             <thead class="thead"> 
                 <tr>
                     <th>Account Number</th>
@@ -27,7 +27,7 @@
     <br>
     <form  class="first" #frm="ngForm" (ngSubmit)="getStatementWithDates(frm.value)">
         <div>
-            Statement from  <input type="date" name="stmtStartDate" ngModel>  To  <input type="date" name="stmtEndDate" ngModel>
+            Statement from  <input type="date" name="stmtStartDate" max="{{todayDate}}" ngModel>  To  <input type="date" max="{{todayDate}}" name="stmtEndDate" ngModel>
         </div>
         <br/>
         <input type="submit" value="Submit">

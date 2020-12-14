@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'user-home',
@@ -6,6 +7,17 @@ import { Component } from '@angular/core';
     styleUrls: ['./user_home.component.css']
 })
 
-export class UserHome{
+export class UserHome
+{
+    constructor(private route:Router){
 
+    }
+
+    goToForgotPass(){
+        this.route.navigate(['forgotpassword'])
+    }
+
+    goToChangeTransPass(){
+        this.route.navigate(['newtransactionpassword'])
+    }
 }

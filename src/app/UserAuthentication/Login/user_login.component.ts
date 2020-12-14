@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthenticationService } from '../authentication.service';
 import {  Router } from '@angular/router';
 import { RequestStatus } from '../Model/RestSimpleTemplate';
+import { UserModel } from 'src/app/Admin/ApproveRequestDashBoard/Models/user.model';
+import { AdminService } from 'src/app/Admin/admin.service';
 
 @Component({
     selector: 'user-login',
@@ -20,8 +22,12 @@ export class UserAuth{
     errormessage:string;
     uservalid:boolean;
     netbankingenabledvalid:boolean;
+    user:UserModel;
 
-    constructor(public dataService: AuthenticationService,formBuilder : FormBuilder, private route: Router){
+    constructor(public dataService: AuthenticationService,formBuilder : FormBuilder, private route: Router, private service:AdminService){
+      
+      this.checkSession();
+      
       this.userIdControl = new FormControl("", Validators.required);
       this.passwordControl = new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(40)]));
 
@@ -67,9 +73,22 @@ export class UserAuth{
     }
 
     checkLogin(){
+      this.error=false;
       let userId = this.userIdControl.value;
       let password = this.passwordControl.value;
-      this.checkUser(userId);
+      this.dataService.checkLogin(userId, password).subscribe(
+        data => {
+          if(data.message === 'User Logged In'){
+            this.getUser(userId);
+          }
+          else{
+            this.error=true;
+            this.errormessage="Invalid password";
+          }
+        }
+      );
+
+      /*this.checkUser(userId);
       console.log(this.uservalid);
       if(this.uservalid==true){
         console.log("userId correct");
@@ -81,7 +100,7 @@ export class UserAuth{
             console.log("in login");
             console.log(data);
             if(this.restSimpleTemplate.status==="success"){
-                this.route.navigate(['/home']);
+                this.route.navigate(['/userDashboard']);
             }else{
                 console.log("Invalid password");
                 this.error=true;
@@ -98,6 +117,31 @@ export class UserAuth{
           console.log("incorrect userid");
           this.error=true;
           this.errormessage="Invalid User ID";
-        }
+        }*/
     }
+
+    saveSession(user:UserModel){
+      sessionStorage.setItem('user', JSON.stringify(user));
+    }
+
+    checkSession(){
+      this.user = JSON.parse(sessionStorage.getItem('user'));
+      if(this.user != null || this.user != undefined){
+        this.route.navigate(['/userDashboard']);
+      }
+  }
+
+    getUser(userId:string){
+      this.service.getUser(userId).subscribe(userData => {
+          if(userData.status === 'success')
+          {
+            this.saveSession(userData.user);
+            this.route.navigate(['/userDashboard']);
+          }
+          else{
+              alert("Some Error Occurred");
+              this.route.navigate(['/login']);
+          }
+      })
+  }
 }

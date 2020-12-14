@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 export class AuthenticationService{
 
-    baseUrl:string = "http://localhost:8080/SpringRest/login/";
+    baseUrl:string = "http://localhost:2798/RestApiGladiator/login/";
     id:number;
 
     constructor(private http: HttpClient){
@@ -36,7 +36,7 @@ export class AuthenticationService{
         params = params.append('userId', userId+"");
         params = params.append('password', password);
         let apiLink:string = this.baseUrl +"checkLogin";
-        return this.http.post<RequestStatus>(apiLink, {params:params})
+        return this.http.post<RequestStatus>(apiLink, {}, {params:params})
     }
 
     checkAccountNo(accountNo:number): Observable<RestUserIdAndOtpTemplate>{
@@ -58,7 +58,7 @@ export class AuthenticationService{
         params = params.append('password', password);
         params = params.append('userId', userId+"");
         let apiLink:string = this.baseUrl +"setNewLoginPassword";
-        return this.http.put<RequestStatus>(apiLink, {params:params})
+        return this.http.put<RequestStatus>(apiLink,{}, {params:params})
     }
 
 

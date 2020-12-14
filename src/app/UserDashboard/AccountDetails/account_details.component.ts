@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AccountStatement } from '../AccountStatement/account_statement.component';
 import { DetailsModel } from '../DashboardModels/details.model';
+
 import { DashboardService } from '../DashboardService/dashboard.service';
 
 @Component({
@@ -12,19 +13,20 @@ import { DashboardService } from '../DashboardService/dashboard.service';
 export class AccountDetails{
 
     dataFetched : boolean = false;
+    userId : number;
+    accountDetails : DetailsModel;
+    fullName : string;
+    dob : string;
+    name:string;
 
     ngOnInit() : void {
         this.getDetails();
     }
 
     constructor (private dashboardService : DashboardService) {
-        
+        this.userId = this.dashboardService.getUserId();
+        this.name = this.dashboardService.getUserName();
     }
-
-    userId : number = 3;
-    accountDetails : DetailsModel;
-    fullName : string;
-    dob : string;
 
     toShortFormat = function(date : Date) {
 
@@ -42,7 +44,6 @@ export class AccountDetails{
         return `${day}-${monthName}-${year}`;  
     }
 
-
     getDetails() : void {
         this.dashboardService.getAccountDetails(this.userId).subscribe( results => {
             this.dataFetched = true;
@@ -55,11 +56,7 @@ export class AccountDetails{
             console.log(this.accountDetails.user.middleName);
             this.dob = this.toShortFormat(new Date(this.accountDetails.user.dob));
             
-        });
-
-        
-
-        
+        });  
 
     }
 

@@ -1,6 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UserModel } from 'src/app/Admin/ApproveRequestDashBoard/Models/user.model';
 import { DetailsModel } from '../DashboardModels/details.model';
 import { StatementModel } from '../DashboardModels/statement.model';
 import { SummaryModel } from '../DashboardModels/summary.model';
@@ -10,9 +12,9 @@ import { SummaryModel } from '../DashboardModels/summary.model';
 })
 export class DashboardService {
 
-    baseUrl : string = "http://localhost:2798/";
+    baseUrl : string = "http://localhost:2798/RestApiGladiator";
 
-    constructor(private http : HttpClient) {
+    constructor(private http : HttpClient, private route:Router) {
         
     }
 
@@ -39,4 +41,25 @@ export class DashboardService {
         return this.http.get<StatementModel>(`${this.baseUrl}/dashboard/getStatement`,{params: this.params});
     }
 
+    getUserId():number{
+        let user:UserModel = JSON.parse(sessionStorage.getItem('user'));
+        if(user == null || user == undefined){
+            this.route.navigate(['/login']);
+            return null;
+        }
+        else{
+            return Number(user.userId);
+        }
+    }
+
+    getUserName():string{
+        let user:UserModel = JSON.parse(sessionStorage.getItem('user'));
+        if(user == null || user == undefined){
+            this.route.navigate(['/login']);
+            return null;
+        }
+        else{
+            return user.firstName + " " +user.lastName;
+        }
+    }
 }

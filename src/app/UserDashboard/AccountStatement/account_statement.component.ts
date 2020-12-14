@@ -13,24 +13,26 @@ import { DashboardService } from '../DashboardService/dashboard.service';
 export class AccountStatement{
 
     dataFetched : boolean = false;
+    todayDate:string;
+    noStartDate : boolean = false;
+    noEndDate : boolean = false;
+    timelineError : boolean = false;
+    lastDateError : boolean = false;
+    firstDateError : boolean = false;
+    userId : number;
+    startDate : string;
+    endDate : string;
+    statement : StatementModel;
 
     ngOnInit() : void {
         this.getStatementWithoutDates();
     }
 
     constructor (private dashboardService : DashboardService, private route : ActivatedRoute) {
-
+        this.userId = this.dashboardService.getUserId();
+        this.todayDate = this.getTodayDate();
+        console.log(this.todayDate);
     }
-
-    noStartDate : boolean = false;
-    noEndDate : boolean = false;
-    timelineError : boolean = false;
-    lastDateError : boolean = false;
-    firstDateError : boolean = false;
-    userId : number = 3;
-    startDate : string;
-    endDate : string;
-    statement : StatementModel;
 
     toShortFormat = function(date : Date) {
 
@@ -48,7 +50,6 @@ export class AccountStatement{
         return `${day}-${monthName}-${year}`;  
     }
 
-
     getStatementWithoutDates() : void {
         this.dataFetched = false;
         this.startDate = null;
@@ -57,6 +58,7 @@ export class AccountStatement{
         .subscribe(results =>{
             this.dataFetched = true;
             this.statement = results;
+            console.log(results);
         } );
     }
 
@@ -96,6 +98,15 @@ export class AccountStatement{
             this.dataFetched = true;
             this.statement = results;
         });
+    }
+
+    getTodayDate(){
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+        let date = yyyy + '-' + mm + '-' + dd;
+        return date;
     }
 }
 

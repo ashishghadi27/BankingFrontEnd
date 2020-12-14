@@ -2,8 +2,9 @@
     padding-top: 10px;
     padding-bottom: 10px;
     padding-right: 0px;
-    padding-left: 0px;
-    background-color: #EF9A9A;
+    background-color: #D32F2F;
+    color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 h3 {
@@ -11,9 +12,5 @@ h3 {
 }
 
 thead {
-    background-color: #FFCDD2;
-}
-
-tbody {
-    background-color: #FFEBEE;
+    background-color: #f75353;
 }

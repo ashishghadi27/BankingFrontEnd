@@ -14,7 +14,7 @@ import { RestOccupationTemplate } from '../Models/rest-occupation-template.model
 @Injectable({ providedIn: 'root' })
 
 export class RegisterService{
-    baseUrl : string = "http://localhost:2021/SpringRest";
+    baseUrl : string = "http://localhost:2798/RestApiGladiator";
 
     constructor(private http: HttpClient){  }
 
@@ -48,9 +48,9 @@ export class RegisterService{
         return this.http.post(this.baseUrl + '/register/insertAddress', body,{'headers':headers})
     }
 
-    insertOccupation(restOccupationTemplate:RestOccupationTemplate){
+    insertOccupation(occupation:Occupation){
         const headers = { 'content-type': 'application/json'}  
-        const body=JSON.stringify(restOccupationTemplate);
+        const body=JSON.stringify(occupation);
         console.log(body);
         return this.http.post(this.baseUrl + '/register/insertOccupation', body,{'headers':headers})
     }
