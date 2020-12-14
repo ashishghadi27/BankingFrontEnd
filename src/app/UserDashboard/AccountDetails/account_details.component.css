@@ -1,0 +1,17 @@
+.header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 0px;
+    padding-left: 0px;
+    background-color: #EF9A9A;
+}
+
+
+td {
+    padding: 10px;
+    padding-right: 30px;
+}
+
+h3 {
+    text-align: center;
+}

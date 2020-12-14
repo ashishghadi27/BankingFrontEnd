@@ -1,34 +1,34 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-xs">
+        <div class="col-sm-2">
             <ul class="nav flex-column">
                 <br>
                 <li class="nav-item">
-                    <a class="nav-link-btn-primary">
+                    <a class="nav-link-btn-primary" [routerLink]="['accountDetails']">
                         Account Details
                     </a>
                 </li>
                 <br>
                 <li class="nav-item">
-                    <a class="nav-link-btn-primary">
+                    <a class="nav-link-btn-primary" [routerLink]="['accountSummary']">
                         Account Summary
                     </a>
                 </li>
                 <br>
                 <li class="nav-item">
-                    <a class="nav-link-btn-primary">
+                    <a class="nav-link-btn-primary" [routerLink]="['accountStatement']">
                         Account Statement
                     </a>
                 </li>
                 <br>
                 <li class="nav-item">
-                    <a class="nav-link-btn-primary">
+                    <a class="nav-link-btn-primary" [routerLink]="">
                         Fund Transfer
                     </a>
                 </li>
                 <br>
                 <li class="nav-item">
-                    <a class="nav-link-btn-primary">
+                    <a class="nav-link-btn-primary" [routerLink]="">
                         Change Password
                     </a>
                 </li>
@@ -36,7 +36,7 @@
         </div>
 
         <div class="col">
-            
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>

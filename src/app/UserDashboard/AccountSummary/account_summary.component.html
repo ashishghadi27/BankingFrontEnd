@@ -1,0 +1,40 @@
+<div *ngIf="dataFetched">
+    <div class="header">
+        <h3>Account Summary</h3>
+    </div>
+    <br>
+    <div class="first">
+        <div *ngIf=true>
+            Account Number : {{summary.account.accountNo}}
+            <br><br>
+            Account Type : {{summary.account.accountType}}
+            <br><br>
+            Balance : &#x20B9; {{summary.account.balance}}
+        </div>
+        <br>
+        <h5>Recent Transactions :</h5>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Reason</th>
+                        <th>Transaction Type</th>
+                        <th>Amount</th>
+                        <th>Credit/Debit</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let transaction of summary.transaction">
+                        <td>{{transaction.endDate}}</td>
+                        <td>{{transaction.reason}}</td>
+                        <td>{{transaction.type}}</td>
+                        <td>{{transaction.amount}}</td>
+                        <td>{{transaction.flow}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

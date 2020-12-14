@@ -12,6 +12,10 @@ import { ApproveRequest } from './Admin/ApproveRequestDashBoard/approve-request.
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { CustRepresLogin } from './Admin/CustReprLogin/cust_login.component';
 import { CustomerRepresentative } from './Admin/CustReprDashboard/cust-repres.component';
+import { UserHome } from './UserDashboard/Home/user_home.component';
+import { AccountSummary } from './UserDashboard/AccountSummary/account_summary.component';
+import { AccountDetails } from './UserDashboard/AccountDetails/account_details.component';
+import { AccountStatement } from './UserDashboard/AccountStatement/account_statement.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { CustomerRepresentative } from './Admin/CustReprDashboard/cust-repres.co
     MainAdminDashboard,
     ApproveRequest,
     CustRepresLogin,
-    CustomerRepresentative
+    CustomerRepresentative,
+    UserHome,
+    AccountSummary,
+    AccountDetails,
+    AccountStatement
   ],
   imports: [
     BrowserModule,
