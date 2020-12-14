@@ -11,6 +11,11 @@ import { AccountDetails } from './UserDashboard/AccountDetails/account_details.c
 import { AccountStatement } from './UserDashboard/AccountStatement/account_statement.component';
 import { AccountSummary } from './UserDashboard/AccountSummary/account_summary.component';
 import { UserHome } from './UserDashboard/Home/user_home.component';
+import { ForgotPassword } from "./UserAuthentication/ResetPassword/ForgotPassword/forgotPassword.component";
+import { ForgotUserId } from "./UserAuthentication/ResetPassword/ForgotUserId/forgotUserId.component";
+import { NewPassword } from "./UserAuthentication/ResetPassword/NewPassword/newPass.component";
+import { NewTransactionPassword } from "./UserAuthentication/ResetPassword/NewTransactionPassword/newTransPass.component";
+import { UserAuth } from "./UserAuthentication/Login/user_login.component";
 
 const routes : Routes = [
     // route object: JSON objects
@@ -46,6 +51,12 @@ const routes : Routes = [
             }
         ]
     },
+    {path:"login",component:UserAuth},
+    {path:"forgotpassword",component:ForgotPassword},
+    {path:"forgotuserid",component:ForgotUserId},
+    {path:"newpassword",component:NewPassword},
+    {path:"newtransactionpassword",component:NewTransactionPassword},
+    
     // fallback component mapping
     {path:"**", component:DefaultError}
 ];

@@ -16,6 +16,11 @@ import { UserHome } from './UserDashboard/Home/user_home.component';
 import { AccountSummary } from './UserDashboard/AccountSummary/account_summary.component';
 import { AccountDetails } from './UserDashboard/AccountDetails/account_details.component';
 import { AccountStatement } from './UserDashboard/AccountStatement/account_statement.component';
+import { ForgotPassword } from './UserAuthentication/ResetPassword/ForgotPassword/forgotPassword.component';
+import { ForgotUserId } from './UserAuthentication/ResetPassword/ForgotUserId/forgotUserId.component';
+import { NewPassword } from './UserAuthentication/ResetPassword/NewPassword/newPass.component';
+import { NewTransactionPassword } from './UserAuthentication/ResetPassword/NewTransactionPassword/newTransPass.component';
+import { UserAuth } from './UserAuthentication/Login/user_login.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,12 @@ import { AccountStatement } from './UserDashboard/AccountStatement/account_state
     UserHome,
     AccountSummary,
     AccountDetails,
-    AccountStatement
+    AccountStatement,
+    UserAuth,
+    ForgotPassword,
+    ForgotUserId,
+    NewPassword,
+    NewTransactionPassword
   ],
   imports: [
     BrowserModule,
