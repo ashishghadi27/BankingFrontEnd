@@ -18,6 +18,7 @@ import { NewTransactionPassword } from "./UserAuthentication/ResetPassword/NewTr
 import { UserAuth } from "./UserAuthentication/Login/user_login.component";
 import { InternetBankingRegistration } from './Registration/InternetBanking/internet_banking_reg.component';
 import { SavingAccountRegistration } from './Registration/SavingsAccount/saving_acc_reg.component';
+import { ServiceReferencePage } from "./Home/ServiceReferencePage/service_reference.component";
 
 const routes : Routes = [
     // route object: JSON objects
@@ -30,6 +31,7 @@ const routes : Routes = [
     {path:"customer-repres-login", component: CustRepresLogin},
     {path:"documentVerification", component: CustomerRepresentative},
     //my paths
+    {path:"serviceStatus", component: ServiceReferencePage},
     {
         path:"userDashboard",
         component: UserHome,

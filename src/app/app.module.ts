@@ -24,6 +24,7 @@ import { UserAuth } from './UserAuthentication/Login/user_login.component';
 import { InternetBankingRegistration } from './Registration/InternetBanking/internet_banking_reg.component';
 import { SavingAccountRegistration } from './Registration/SavingsAccount/saving_acc_reg.component';
 import { RegisterService } from './Registration/Services/register.service';
+import { ServiceReferencePage } from './Home/ServiceReferencePage/service_reference.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { RegisterService } from './Registration/Services/register.service';
     NewTransactionPassword,
     InternetBankingRegistration,
     SavingAccountRegistration,
-    DefaultError
+    DefaultError,
+    ServiceReferencePage
 
   ],
   imports: [
