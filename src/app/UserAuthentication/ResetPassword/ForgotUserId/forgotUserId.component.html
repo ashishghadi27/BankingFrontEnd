@@ -1,19 +1,38 @@
-<div>
+<div class="container d-flex h-100">
 
-    <h2>Forgot User ID</h2>
+    <div class="maindiv align-self-center">
+        <h3>Forgot UserID</h3>
 
-    <h3>Enter Details</h3>
+        <div class=enterheader>
+            <h3>Enter Details</h3>
+        </div>
 
-    <form>
-        <label for="account_number">Enter Account Number</label>
-        <input type="text" name="account_number"><br>
-        
-        <label for="otp">Enter OTP</label>
-        <input type="text" name="otp"><br>
-        
-        <input type="submit" value="Proceed">
-        
-        <button >Back</button>
-    </form>
+        <span class="text-danger" *ngIf="error">{{errormessage}}</span>
+        <form [formGroup]="ForgotUserIdForm" (ngSubmit)="checkAccountNo()">
+            <div class="inputHolder">
+                <input type="text" placeholder="Enter Account Number" name="accountNo"
+                    [formControl]="accountNoControl" /><br>
+                <span *ngIf="!accountNoControl.valid && accountNoControl.dirty" class="text-danger">Account Number
+                    required!!</span>
+            </div>
 
+            <div *ngIf="checkable" class="inputHolder">
+                <input class="btn btn-success" type="submit" value="Check" />
+            </div>
+        </form>
+
+        <form [formGroup]="OtpCheckForm" (ngSubmit)="checkOtp()">
+            <div *ngIf="otpvisible" class="inputHolder">
+                <input type="text" placeholder="Enter OTP" name="otp" [formControl]="otpControl" /><br>
+                <span *ngIf="otpControl.hasError('required') && otpControl.dirty" class="text-danger">OTP
+                    required!!</span>
+            </div>
+
+            <div *ngIf="otpvisible" class="inputHolder">
+                <input class="btn btn-success" type="submit" value="Proceed" />
+            </div>
+        </form>
+
+        <button (click)=back()>Back</button>
+    </div>
 </div>

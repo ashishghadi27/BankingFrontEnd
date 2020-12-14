@@ -1,15 +1,29 @@
-<div>
+<div class="container d-flex h-100">
 
-    <h2>Set New Transaction Password</h2>
+  <div class="maindiv align-self-center">
+      <h3>Set New Transaction Password</h3>
+      <br>
+      <span class="text-danger" *ngIf="error">Something went Wrong</span>
+      <form [formGroup]="newPasswordForm" (ngSubmit)="setTransactionPassword()">
+          <div class="inputHolder">
+              <input type="text" placeholder="Enter New Password" name="transaction_password" [formControl]="passwordControl" /><br>
+              <span *ngIf="!passwordControl.valid && passwordControl.dirty" class="text-danger">Password required!!</span>
+          </div>
 
-    <form>
-        <label for="transaction_password">Transaction Password</label>
-        <input type="text" name="transaction_password"><br>
-        
-        <label for="confirm_password">Confirm Transaction Password</label>
-        <input type="password" name="confirm_password"><br>
-        
-        <input type="submit" value="Submit">
+          <div class="inputHolder">
+              <input type="password" placeholder="Confirm Password" name="confirmpassword"
+                  [formControl]="confirmPasswordControl" /><br>
+              <span *ngIf="confirmPasswordControl.hasError('required') && confirmPasswordControl.dirty" class="text-danger">Confirm Password
+                  required!!</span>
+              <span *ngIf="confirmPasswordControl.hasError('minLength') && confirmPasswordControl.dirty"
+                  class="text-danger">Password should be of minimum 4 characters</span>
+              <span *ngIf="confirmPasswordControl.hasError('maxLength') && confirmPasswordControl.dirty"
+                  class="text-danger">Password should be of maximum 40 characters</span>
+          </div>
+
+          <div class="inputHolder">
+              <input class="btn btn-success" type="submit" value="Login" />
+          </div>
       </form>
-
+  </div>
 </div>
