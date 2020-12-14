@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
     styleUrls: ['./service_reference.component.css']
 })
 
-export class ServiceReference{
+export class ServiceReferencePage{
 
 }

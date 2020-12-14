@@ -1,0 +1,39 @@
+.navbar{
+    background-color: #00695C;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+thead{
+    background-color: #00897B;
+}
+
+input{
+    width: 85%;
+    margin-right: 20px;
+    border: none;
+    background: transparent;
+}
+
+.approve{
+    color: #fff;
+    background-color:#2E7D32;
+    font-weight: 700;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+label{
+    font-weight: 700;
+}
+
+.circle-progress {
+    text-align: center;
+    width: 100%;
+}
+
+select{
+    border-radius: 5px;
+    padding: 5px;
+}

@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminService } from '../admin.service';
-import { Admin } from './Models/admin-login.model';
-import { RestAdmin } from './Models/rest-admin.model';
+import { CustomerRepresenativeModel } from './Models/custLogin.Model';
+import { RestCustRepresModel } from './Models/rest-custLogin.model';
 
 @Component({
-    selector: 'admin-login',
-    templateUrl: 'admin_login.component.html',
-    styleUrls: ['./admin_login.component.css']
+    selector: 'cust-login',
+    templateUrl: 'cust_login.component.html',
+    styleUrls: ['./cust_login.component.css']
 })
 
-export class AdminLogin{
+export class CustRepresLogin{
 
     loginForm: FormGroup;
     usernameControl: FormControl;
@@ -32,10 +32,10 @@ export class AdminLogin{
     }
 
     checkSession(){
-        let admin:Admin = JSON.parse(sessionStorage.getItem('admin'));
-        console.log(admin);
-        if(admin != null || admin != undefined){
-            this.router(admin);
+        let custRepres:CustomerRepresenativeModel = JSON.parse(sessionStorage.getItem('cust'));
+        console.log(custRepres);
+        if(custRepres != null || custRepres != undefined){
+            this.router();
         }
     }
 
@@ -43,13 +43,15 @@ export class AdminLogin{
         this.invalid = false;
         let username = this.usernameControl.value;
         let password = this.passwordControl.value;
-        let restAdminTemplate:RestAdmin;
-        this.service.login(username,password).subscribe(
+        let restCustTemplate:RestCustRepresModel;
+        this.service.custLogin(username,password).subscribe(
             (data)=>{
-                restAdminTemplate = data;
-                if(restAdminTemplate.admin != null){
+                restCustTemplate = data;
+                console.log(restCustTemplate);
+                if(restCustTemplate.customerRepres != null){
                     console.log("Login Success");
-                    this.router(restAdminTemplate.admin);
+                    this.saveSession(restCustTemplate.customerRepres);
+                    this.router();
                 }
                 else{
                     this.invalid = true;
@@ -58,20 +60,12 @@ export class AdminLogin{
         );
     }
 
-    saveSession(admin:Admin){
-        sessionStorage.setItem('admin', JSON.stringify(admin));
+    saveSession(cust:CustomerRepresenativeModel){
+        sessionStorage.setItem('cust', JSON.stringify(cust));
     }
 
-    router(admin:Admin){
-        if(admin.role === 'MAIN'){
-            this.saveSession(admin);
-            this.route.navigate(['/mainAdminDash']);
-        }
-        else{
-            this.saveSession(admin);
-            this.route.navigate(['/approveRequestDash']);
-            
-        }
+    router(){
+        this.route.navigate(['/documentVerification']);
     }
 
 }
