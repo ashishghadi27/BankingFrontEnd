@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { RestOTPTemplate } from '../Models/rest-otp-template.model';
 import { RegisterService } from '../Services/register.service';
 
