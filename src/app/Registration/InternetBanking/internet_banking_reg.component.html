@@ -1,61 +1,72 @@
-<html>
-<head>
-	<title>Register Internet Banking</title>
-</head>
-<body>
-<div>
-<strong>Register for Internet Banking</strong>
-</div><br><br>
-<div>
-<center>
-<table>
-<tr>
-	<td>Account Number</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="acc_no" style="width:250px;margin:5px 0px">
-	</td>
-</tr>
-<tr>
-	<td>Set Login Password</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="lpasswd" style="width:250px;margin:5px 0px">
-	</td>
-</tr>
-<tr>
-	<td>Confirm Login Password</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="confirm_lpasswd" style="width:250px;margin:5px 0px">
-	</td>
-</tr>
-<tr>
-	<td>Set Transaction Password</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="tpasswd" style="width:250px;margin:5px 0px">
-	</td>
-</tr>
-<tr>
-	<td>Confirm Transaction Password</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="confirm_tpasswd" style="width:250px;margin:5px 0px">
-	</td>
-</tr>
-<tr>
-	<td>Enter OTP</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="otp" style="width:250px;margin:5px 0px">
-	</td>
-</tr>
-<tr>
-	<td colspan=3><br><button type="submit" value="Submit"><strong>Submit</strong></button><br></td>
-</tr>
-</table>
-</center>
-<div>
-</body>
-</html>
+<h2 style="border:1px solid black;text-align: center;">Register for Internet Banking</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+	<table style="margin-left: auto;margin-right: auto;">
+		<tr>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Enter Account No. :</td>
+			<td>
+				<input type="text" formControlName="AccountNo"  [ngClass]="{ 'is-invalid': submitted && f.AccountNo.errors }" />
+				<div *ngIf="submitted && f.AccountNo.errors" class="invalid-feedback">
+					<div *ngIf="f.AccountNo.errors.required">Account No. is required</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Login Password :</td>
+			<td>
+				<input type="password" formControlName="password"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+				<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+					<div *ngIf="f.password.errors.required">Password is required</div>
+					<div *ngIf="f.password.errors.minlength">Password must be > 6 character long</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Confirm Login Password :</td>
+			<td>
+				<input type="password" formControlName="confirmPassword"  [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+				<div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+					<div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+					<div *ngIf="f.confirmPassword.errors.mustMatch">Password should be same as Confirm password</div>
+				</div>
+			</td>
+        </tr>
+        <tr>
+			<td>Login Password :</td>
+			<td>
+				<input type="password" formControlName="tpassword"  [ngClass]="{ 'is-invalid': submitted && f.tpassword.errors }" />
+				<div *ngIf="submitted && f.tpassword.errors" class="invalid-feedback">
+					<div *ngIf="f.tpassword.errors.required">Password is required</div>
+					<div *ngIf="f.tpassword.errors.minlength">Password must be > 6 character long</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Confirm Login Password :</td>
+			<td>
+				<input type="password" appConfirmEqualValidator="password" formControlName="tconfirmPassword"  [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+				<div *ngIf="submitted && f.tconfirmPassword.errors" class="invalid-feedback">
+					<div *ngIf="f.tconfirmPassword.errors.required">Confirm Password is required</div>
+					<div *ngIf="f.tconfirmPassword.errors.mustMatch">Password should be same as Confirm password</div>
+				</div>
+			</td>
+        </tr>
+        <tr>
+			<td>Enter OTP :</td>
+			<td>
+				<input type="text" formControlName="lastName"  [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+				<div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+					<div *ngIf="f.lastName.errors.required">Last Name is required</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+            <td style="padding  : 0px 0px 0px 150px;">
+                <br>
+				<input class="btn btn-success" type="submit" value="Submit">
+			</td>
+		</tr>
+	</table>
+</form>

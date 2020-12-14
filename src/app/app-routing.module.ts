@@ -16,6 +16,8 @@ import { ForgotUserId } from "./UserAuthentication/ResetPassword/ForgotUserId/fo
 import { NewPassword } from "./UserAuthentication/ResetPassword/NewPassword/newPass.component";
 import { NewTransactionPassword } from "./UserAuthentication/ResetPassword/NewTransactionPassword/newTransPass.component";
 import { UserAuth } from "./UserAuthentication/Login/user_login.component";
+import { InternetBankingRegistration } from './Registration/InternetBanking/internet_banking_reg.component';
+import { SavingAccountRegistration } from './Registration/SavingsAccount/saving_acc_reg.component';
 
 const routes : Routes = [
     // route object: JSON objects
@@ -56,7 +58,9 @@ const routes : Routes = [
     {path:"forgotuserid",component:ForgotUserId},
     {path:"newpassword",component:NewPassword},
     {path:"newtransactionpassword",component:NewTransactionPassword},
-    
+    //registration module component
+    {path:"saving",component: SavingAccountRegistration},
+    {path:"internetbanking", component: InternetBankingRegistration},
     // fallback component mapping
     {path:"**", component:DefaultError}
 ];

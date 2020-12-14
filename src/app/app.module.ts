@@ -21,6 +21,9 @@ import { ForgotUserId } from './UserAuthentication/ResetPassword/ForgotUserId/fo
 import { NewPassword } from './UserAuthentication/ResetPassword/NewPassword/newPass.component';
 import { NewTransactionPassword } from './UserAuthentication/ResetPassword/NewTransactionPassword/newTransPass.component';
 import { UserAuth } from './UserAuthentication/Login/user_login.component';
+import { InternetBankingRegistration } from './Registration/InternetBanking/internet_banking_reg.component';
+import { SavingAccountRegistration } from './Registration/SavingsAccount/saving_acc_reg.component';
+import { RegisterService } from './Registration/Services/register.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,11 @@ import { UserAuth } from './UserAuthentication/Login/user_login.component';
     ForgotPassword,
     ForgotUserId,
     NewPassword,
-    NewTransactionPassword
+    NewTransactionPassword,
+    InternetBankingRegistration,
+    SavingAccountRegistration,
+    DefaultError
+
   ],
   imports: [
     BrowserModule,
@@ -58,7 +65,7 @@ import { UserAuth } from './UserAuthentication/Login/user_login.component';
       animationDuration: 300,
     }),
   ],
-  providers: [],
+  providers: [RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
