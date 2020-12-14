@@ -1,217 +1,308 @@
-<html>
-<head><title>Open Savings Acc</title></head>
-<body>
-<div>
-<strong>Open A Savings Account</strong>
+<div *ngIf="datafetched">
+	<h2 style="border:1px solid black;text-align: center;">Open a savings Account</h2>
+	<h3 style="border:1px solid black;text-align: center;">Personal Details</h3>
+	<div>
+	<form [formGroup]="registerForm" (ngSubmit)="register()">
+	<div class="row">
+		<div class="col-6" style="padding:0px 0px 0px 400px">
+			<label>Title*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-6">
+			<select name="title">
+				<option value="Ms.">Ms.</option>
+				<option value="Mrs.">Mrs.</option>
+				<option value="Mr.">Mr.</option>
+			</select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6" style="padding:0px 0px 0px 400px">
+			<label>First Name*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-6">
+			<input type="text" placeholder="Enter First name" name="firstname" [formControl]="firstname" required/><br>
+			<span *ngIf="!firstname.valid && firstname.dirty" class="text-danger">Invalid Firstname!!</span>
+		</div>
+	</div><div class="row">
+		<div class="col-6" style="padding:0px 0px 0px 400px">
+			<label>Middle Name*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-6">
+			<input type="text" placeholder="Enter Middle name" name="middlename" [formControl]="middlename"/><br>	
+			<span *ngIf="!middlename.valid && middlename.dirty" class="text-danger">Invalid Middlename!!</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6" style="padding:0px 0px 0px 400px">
+			<label>Last Name*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-6">
+			<input type="text" placeholder="Enter Last name" name="lastname" [formControl]="lastname"/><br>	
+			<span *ngIf="!lastname.valid && lastname.dirty" class="text-danger">Invalid Lastname!!</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6" style="padding:0px 0px 0px 400px">
+			<label>Father's Name</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-6">
+			<input type="text" placeholder="Enter Father's name" name="fathername"/><br>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6" style="padding:0px 0px 0px 400px">
+			<label>Mobile No.*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-6">
+			<input type="text" placeholder="Enter Mobile No." name="mobileno" [formControl]="mobileno"/><br>	
+			<span *ngIf="mobileno.errors.required && mobileno.dirty" class="text-danger">Valid Mobile No. required!!</span>
+			<span *ngIf="mobileno.errors.minLength || mobileno.errors.maxlength || mobileno.errors.pattern" class="text-danger">Mobile No. must be of 10 digits!!</span>
+			
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6" style="padding:0px 0px 0px 400px">
+			<label>Email ID*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-6">
+			<input type="text" placeholder="Enter Email Id" name="email" [formControl]="emailId"/><br>	
+			<span *ngIf="!emailId.valid && emailId.dirty" class="text-danger">Invalid Email ID!!</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6" style="padding:0px 0px 0px 400px">
+			<label>Aadhar No.*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-6">
+			<input type="text" placeholder="Enter Aadhar No." name="aadhar" [formControl]="aadharno"/><br>	
+			<span *ngIf="!aadharno.valid && aadharno.dirty" class="text-danger">Invalid Aadhar No.!!</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6" style="padding:0px 0px 0px 400px">
+			<label>Date of Birth*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-6">
+			<input type="date" name="dob" [formControl]="dob"/><br>	
+			<span *ngIf="!dob.valid && dob.dirty" class="text-danger">Date of Birth required!!</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6" style="padding:0px 0px 0px 400px">
+			<label>Residential Address</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>Line1*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<input type="text" placeholder="Line1" name="Rline1" [formControl]="Rline1"/><br>	
+			<span *ngIf="!Rline1.valid && Rline1.dirty" class="text-danger">Line1 required!!</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>Line2*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<input type="text" placeholder="Line2" name="Rline2" [formControl]="Rline2"/><br>	
+			<span *ngIf="!Rline2.valid && Rline2.dirty" class="text-danger">Line2 required!!</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>LandMark</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<input type="text" placeholder="LandMark" name="Rlandmark"/><br>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>State*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<select name="Rstate" (change)="selectChangeHandler($event)">
+				<option *ngFor="let s of restStateTemplate.stateList" [ngValue]="s.stateId" value="{{s.stateId}}">{{s.stateName}}</option>
+			</select>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>City*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<select name="Rcity">
+				<option *ngFor="let c of restCityTemplate.cityList" [ngValue]="c.cityId" value="{{c.cityId}}">{{c.cityName}}</option>
+			</select>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>Pincode*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<input type="text" placeholder="Pincode" name="RPincode" [formControl]="Rpincode"/><br>	
+			<span *ngIf="!Rpincode.valid && Rpincode.dirty" class="text-danger">Valid Pincode required!!</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6" style="padding:0px 0px 0px 400px">
+			<label>Permanent Address</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-6" style="padding:0px 0px 0px 300px">
+			<input type="checkbox" name="sameadd"/>
+			<label>Permanent Address same as Residential Address</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>Line1*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<input type="text" placeholder="Line1" name="Pline1" [formControl]="Pline1"/><br>	
+			<span *ngIf="!Pline1.valid && Pline1.dirty" class="text-danger">Line1 required!!</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>Line2*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<input type="text" placeholder="Line2" name="Pline2" [formControl]="Pline2"/><br>	
+			<span *ngIf="!Pline2.valid && Pline2.dirty" class="text-danger">Line2 required!!</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>LandMark</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<input type="text" placeholder="LandMark" name="Plandmark"/><br>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>State*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<select name="Pstate" (change)="selectChangeHandler($event)">
+				<option *ngFor="let s of restStateTemplate.stateList" [ngValue]="s.stateId" value="{{s.stateId}}">{{s.stateName}}</option>
+			</select>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>City*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<select name="Pcity">
+				<option *ngFor="let c of restCityTemplate.cityList" [ngValue]="c.cityId" value="{{c.cityId}}">{{c.cityName}}</option>
+			</select>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>Pincode*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<input type="text" placeholder="Pincode" name="PPincode" [formControl]="Ppincode"/><br>	
+			<span *ngIf="!Ppincode.valid && Ppincode.dirty" class="text-danger">Valid Pincode required!!</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6" style="padding:0px 0px 0px 400px">
+			<label>Occupation Details</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>Occupation Type*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<select name="occ_type" [formControl]="occtype">
+				<option value="Salaried">Salaried</option>
+				<option value="Business">Business</option>
+				<option value="Self-Employed">Self-Employed</option>
+				<option value="Retired">Retired</option>
+				<option value="Housewife">Housewife</option>
+				<option value="Others">Others</option>
+			</select>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>b)Source of Income*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<select name="src_income" [formControl]="srcincome">
+				<option value="Salary">Salary</option>
+						<option value="House Property">House Property</option>
+						<option value="Business">Business</option>
+						<option value="Other sources">Other sources</option>
+			</select>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-5" style="padding:0px 0px 0px 400px">
+			<label>c)Gross Annual Income*</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+		<div class="col-5">
+			<select name="annualIncome" [formControl]="annualIncome">
+				<option value="less50K">Less than 50K</option>
+						<option value="less1L">Less than 1L</option>
+						<option value="more1L">More than 1L</option>
+			</select>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-6" style="padding:0px 0px 0px 300px">
+			<input type="checkbox" name="debitEnabled" [formControl]="debitEnabled"/>
+			<label>Do you want a debit card?</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-6" style="padding:0px 0px 0px 300px">
+			<input type="checkbox" name="netBankingEnabled" [formControl]="netBankingEnabled"/>
+			<label>Opt for netbanking</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-6" style="padding:0px 0px 0px 300px">
+			<input type="checkbox" name="agree" [formControl]="agree"/>
+			<label>I agree...</label>&nbsp;&nbsp;&nbsp;
+		</div>		
+	</div>
+	<div>
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-8" style="padding:0px 0px 0px 150px">
+				<br>
+				<input class="btn btn-success" type="submit" value="Submit">
+			</div>		
+		</div>
+	</div>
+	</form>
 </div>
-<div>
-<strong>Personal Details</strong>
-</div>
-<div>
-<center>
-<table>
-<tr>
-	<td>Title*</td>
-	<td>-</td>
-	<td>
-		<select name="title" style="width:250px">
-			<option value="Ms.">Ms.</option>
-			<option value="Mrs.">Mrs.</option>
-			<option value="Mr">Mr</option>
-		</select>
-	</td>
-</tr>
-
-<tr>
-	<td>First Name*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="fname" >
-	</td>
-</tr>
-<tr>
-	<td >Middle Name</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="mname" >
-	</td>
-</tr>
-<tr>
-	<td >Last Name*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="lname" >
-	</td>
-</tr>
-<tr>
-	<td >Mobile Number*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="mobileno" >
-	</td>
-</tr>
-<tr>
-	<td >Email ID</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="email" >
-	</td>
-</tr>
-<tr>
-	<td >Aadhar Card Number*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="aadhar" >
-	</td>
-</tr>
-<tr>
-	<td >Date of Birth*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="dob" >
-	</td>
-</tr>
-<tr>
-	<td ><br>Residential Address</td>
-</tr>
-<tr>
-	<td><br>a)Address Line 1*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="add1" >
-	</td>
-</tr>
-<tr>
-	<td>b)Address Line 2*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="add2" >
-	</td>
-</tr>
-<tr>
-	<td>c)Landmark</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="landmark" >
-	</td>
-</tr>
-<tr>
-	<td>d)State*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="state" >
-	</td>
-</tr>
-<tr>
-	<td>e)City*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="city" >
-	</td>
-</tr>
-<tr>
-	<td>f)Pincode*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="pincode" >
-	</td>
-</tr>
-<tr>
-	<td ><br>Permanent Address</td>
-</tr>
-<tr>
-	<td colspan="3"><br><input type="checkbox" name="address">Permanent Address same as Mailing Address</td>
-</tr>
-<tr>
-	<td><br>a)Address Line 1*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="add1" >
-	</td>
-</tr>
-<tr>
-	<td>b)Address Line 2*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="add2" >
-	</td>
-</tr>
-<tr>
-	<td>c)Landmark</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="landmark" >
-	</td>
-</tr>
-<tr>
-	<td>d)State*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="state" >
-	</td>
-</tr>
-<tr>
-	<td>e)City*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="city" >
-	</td>
-</tr>
-<tr>
-	<td>f)Pincode*</td>
-	<td>-</td>
-	<td>
-	    <input type="text" name="pincode" >
-	</td>
-</tr>
-<tr>
-	<td ><br>Occupatin Details</td>
-</tr>
-<tr>
-	<td><br>a)Occupation Type*</td>
-	<td>-</td>
-	<td>
-	    <select name="occ_type" style="width:200px">
-			<option value="Salaried">Salaried</option>
-			<option value="Business">Business</option>
-			<option value="Self-Employed">Self-Employed</option>
-			<option value="Retired">Retired</option>
-			<option value="Housewife">Housewife</option>
-			<option value="Others">Others</option>
-		</select>
-	</td>
-</tr>
-<tr>
-	<td>b)Source of Income*</td>
-	<td>-</td>
-	<td>
-		<input type="text" name="src_income" >    
-	</td>
-</tr>
-<tr>
-	<td>c)Gross Annual Income*</td>
-	<td>-</td>
-	<td>
-		<input type="text" name="ann_income" >    
-	</td>
-</tr>
-<tr>
-	<td ><br>Debit/ATM Card</td>
-</tr>
-<tr>
-	<td colspan="3"><br><input type="checkbox" name="card">Do you want a debit card ?</td>
-</tr>
-<tr>
-	<td ><br><input type="checkbox" name="netbanking">Opt for Net Banking</td>
-</tr>
-<tr>
-	<td ><br><input type="checkbox" name="netbanking">I agree</td>
-</tr>
-<tr>
-	<td colspan=3><br><button type="submit" value="Submit"><strong>Submit</strong></button><br></td>
-</tr>
-</table>
-</center>
-<div>
-</body>
-</html>

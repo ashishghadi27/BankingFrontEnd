@@ -5,11 +5,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WebHome } from './Home/HomePage/web_home.component';
 import { DefaultError } from './CommonPages/DefaultErrorPage/default_error.component';
 import { AppRouting } from './app-routing.module';
+import { InternetBankingRegistration } from './Registration/InternetBanking/internet_banking_reg.component';
+import { SavingAccountRegistration } from './Registration/SavingsAccount/saving_acc_reg.component';
+import { RegisterService } from './Registration/Services/register.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     WebHome,
+    InternetBankingRegistration,
+    SavingAccountRegistration,
     DefaultError
 
   ],
@@ -17,9 +23,10 @@ import { AppRouting } from './app-routing.module';
     BrowserModule,
     AppRouting,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
