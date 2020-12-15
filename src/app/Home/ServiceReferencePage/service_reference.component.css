@@ -1,0 +1,41 @@
+.center {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, 0%);
+}
+input {
+    margin-bottom: 40px;
+}
+.btn {
+    position: fixed;
+    top: fixed;
+    left: 50%;
+    
+    /* bring your own prefixes */
+    transform: translate(-50%, 0%); 
+    margin-bottom: 30px;
+}
+
+.progress {
+    position: fixed;
+    top: fixed;
+    left: 50%;
+
+    transform: translate(-50%, 0%); 
+    width : 400px;
+    height : 30px;
+    margin-top: 70px;
+    background-color: #D1C4E9;
+}
+
+.progress-bar{
+    background-color: #311B92;
+}
+
+#message {
+    margin-top: 120px;
+    left: 50%;
+    text-align: center;
+}

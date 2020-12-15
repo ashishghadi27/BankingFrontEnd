@@ -24,6 +24,7 @@ import { NEFT } from "./FundsTransfer/NEFT/neft.component";
 import { RTGS } from "./FundsTransfer/RTGS/rtgs.component";
 import { TransferSuccessful } from "./FundsTransfer/TransferSuccess/transfer_success.component";
 import { AddBeneficiary } from "./FundsTransfer/AddBeneficiary/add_beneficiary.component";
+import { ServiceReferencePage } from "./Home/ServiceReferencePage/service_reference.component";
 
 const routes : Routes = [
     // route object: JSON objects
@@ -36,6 +37,7 @@ const routes : Routes = [
     {path:"customer-repres-login", component: CustRepresLogin},
     {path:"documentVerification", component: CustomerRepresentative},
     //my paths
+    {path:"serviceStatus", component: ServiceReferencePage},
     {
         path:"userDashboard",
         component: UserHome,

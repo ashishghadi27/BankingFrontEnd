@@ -30,6 +30,7 @@ import { RTGS } from './FundsTransfer/RTGS/rtgs.component';
 import { FundsTransferHome } from './FundsTransfer/fund-transfer-homepage.component';
 import { TransferSuccessful } from './FundsTransfer/TransferSuccess/transfer_success.component';
 import { AddBeneficiary } from './FundsTransfer/AddBeneficiary/add_beneficiary.component';
+import { ServiceReferencePage } from './Home/ServiceReferencePage/service_reference.component';
 
 @NgModule({
   declarations: [
@@ -58,8 +59,8 @@ import { AddBeneficiary } from './FundsTransfer/AddBeneficiary/add_beneficiary.c
     RTGS,
     FundsTransferHome,
     TransferSuccessful,
-    AddBeneficiary
-
+    AddBeneficiary,
+    ServiceReferencePage
   ],
   imports: [
     BrowserModule,
