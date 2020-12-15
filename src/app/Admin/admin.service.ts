@@ -122,18 +122,19 @@ export class AdminService{
         return this.http.get<RestCustRepresModel>(apiLink, {params:params});
     }
 
-    sendSms(internetBanking:InternetBankingModel, phoneNo:string){
-        const headers = {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Basic YnlzaTg3MjI6RGlsS2YxSWg='
-        }
-        let body = "{\n\t\"to\":\"9664359034\",\n\t\"content\":\"Welcome to D7 sms , we will help you to talk with your customer effectively\",\n\t\"from\":\"SMSINFO\",\n\t\"dlr\":\"yes\",\n\t\"dlr-method\":\"GET\", \n\t\"dlr-level\":\"2\", \n\t\"dlr-url\":\"http://yourcustompostbackurl.com\"\n}";
+    sendSms(message:string, phoneNo:string){
+        const headers = { 
+            'content-type': 'application/json',
+            'Accept':'*/*'
+        }  
+        phoneNo = phoneNo.trim();
         console.log(phoneNo);
-        let message = 'Your Account has been approved. Account No: ' + internetBanking.accountNo + '\n User ID: ' + internetBanking.username + '\nPassword: ' + internetBanking.password +  '\nTransaction Password: ' + internetBanking.transPass;
-        let link = 'https://rest-api.d7networks.com/secure/send';
-        this.http.post(link, body,{'headers':headers}).subscribe(data=>{
-            console.log(data);
-        })
+        //let message = 'Your Account has been approved. Account No: ' + internetBanking.accountNo + '\n User ID: ' + internetBanking.username + '\nPassword: ' + internetBanking.password +  '\nTransaction Password: ' + internetBanking.transPass;
+        let params = new HttpParams();
+        params = params.append('phone', phoneNo);
+        params = params.append('message', message);
+        let apiLink:string = this.baseUrl + this.requestMapping + "/sendSMS";
+        return this.http.get(apiLink, {params:params, 'headers':headers},);
         
     }
 

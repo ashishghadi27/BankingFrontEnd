@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DashboardService } from 'src/app/UserDashboard/DashboardService/dashboard.service';
 import { AuthenticationService } from '../../authentication.service';
 import { RequestStatus } from '../../Model/RestSimpleTemplate';
 
@@ -17,7 +18,7 @@ export class NewTransactionPassword{
     confirmPasswordControl: FormControl;
     restTemplate:RequestStatus;
 
-    constructor(public dataService: AuthenticationService, formBuilder: FormBuilder, private route: Router) {
+    constructor(public dataService: AuthenticationService, formBuilder: FormBuilder, private route: Router, private dashService:DashboardService) {
         this.passwordControl = new FormControl("", Validators.required);
         this.confirmPasswordControl = new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(40)]));
 
@@ -31,28 +32,33 @@ export class NewTransactionPassword{
         let password = this.passwordControl.value;
         let confirmpassword = this.confirmPasswordControl.value;
         let error = false;
-        let userId=this.dataService.id;
-
-
-        this.dataService.setNewLoginPassword(userId,password).subscribe((data) => {
-            this.restTemplate = data;
-            console.log(data);
-            if(this.restTemplate.status==="success"){
-                if (password===confirmpassword) {
-                    console.log("success");
+        let userId=this.dashService.getUserId();
+        if(userId == undefined || userId == null){
+            this.route.navigate(['/login']);
+        }
+        this.dashService.getAccountSummary(userId).subscribe((data)=>{
+            let accNo = data.account.accountNo;
+            if(password===confirmpassword){
+                if(accNo != null || accNo != undefined){
+                    this.dataService.setNewTransPassword(accNo,password).subscribe((data) => {
+                        this.restTemplate = data;
+                        console.log(data);
+                        if(this.restTemplate.status==="success"){
+                            alert('Transaction Password Updated');
+                            this.route.navigate(['/userDashboard']);            
+                        }else{
+                           error=true;
+                           console.log("something went wrong"); 
+                        }
+                    });
                 }
-                else{
-                    error=true;
-                    console.log("passwords do not match");
-                }
-
-            }else{
-               error=true;
-               console.log("something went wrong"); 
+            }
+            else{
+                error=true;
+                console.log("passwords do not match");
             }
             
-
-        });
+        })
     }
 
 }

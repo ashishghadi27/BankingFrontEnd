@@ -4,12 +4,16 @@ import { Observable } from 'rxjs';
 import { RestOTPTemplate } from '../Models/rest-otp-template.model';
 import { RestStateTemplate } from '../Models/rest-state-template.model';
 import { RestCityTemplate } from '../Models/rest-city-template.model';
-import { User } from '../Models/user.model';
+
 import { Address } from '../Models/address.model';
-import { Occupation } from '../Models/occupation.model';
-import { RestUserTemplate } from '../Models/rest-user-template.model';
-import { RestAddressTemplate } from '../Models/rest-address-template.model';
-import { RestOccupationTemplate } from '../Models/rest-occupation-template.model';
+import { User } from 'src/app/UserDashboard/DashboardModels/user.model';
+import { RestCreateUsertemplate } from '../Models/rest-create-user-temp.model';
+import { ServiceReference } from 'src/app/Home/Models/service-ref.model';
+import { RestServiceReferenceModel } from 'src/app/Home/Models/service-ref-temp.model';
+import { RestSimpleTemplate } from '../Models/rest-simple-template.model';
+import { Occupation } from 'src/app/UserDashboard/DashboardModels/occupation.model';
+import { InternetBanking } from '../InternetBanking/Models/internetbanking.model';
+import { RestInternetBanking } from '../InternetBanking/Models/rest-internetbanking.model';
 
 @Injectable({ providedIn: 'root' })
 
@@ -34,24 +38,47 @@ export class RegisterService{
         return this.http.get<RestCityTemplate>(`${this.baseUrl}/utility/cities`,{params: params});
     }
 
-    createUser(restUserTemplate:RestUserTemplate){
+    createUser(user:User) : Observable<RestCreateUsertemplate>{
         const headers = { 'content-type': 'application/json'}  
-        const body=JSON.stringify(restUserTemplate);
+        const body=JSON.stringify(user);
         console.log(body);
-        return this.http.post(this.baseUrl + '/register/createUser', body,{'headers':headers})
+        return this.http.post<RestCreateUsertemplate>(this.baseUrl + '/register/createUser', body,{'headers':headers})
     }
 
-    insertAddress(restAddressTemplate:RestAddressTemplate){
+    insertAddress(address : Address) : Observable<RestSimpleTemplate>{
         const headers = { 'content-type': 'application/json'}  
-        const body=JSON.stringify(restAddressTemplate);
+        const body=JSON.stringify(address);
         console.log(body);
-        return this.http.post(this.baseUrl + '/register/insertAddress', body,{'headers':headers})
+        return this.http.post<RestSimpleTemplate>(this.baseUrl + '/register/insertAddress', body,{'headers':headers})
     }
 
-    insertOccupation(occupation:Occupation){
+    insertOccupation(occupation:Occupation) : Observable<RestSimpleTemplate>{
         const headers = { 'content-type': 'application/json'}  
         const body=JSON.stringify(occupation);
         console.log(body);
-        return this.http.post(this.baseUrl + '/register/insertOccupation', body,{'headers':headers})
+        return this.http.post<RestSimpleTemplate>(this.baseUrl + '/register/insertOccupation', body,{'headers':headers})
+    }
+
+    generateServiceReference(userId:string, status:string, remark:string):Observable<RestServiceReferenceModel>{
+        const headers = { 'content-type': 'application/json'}
+        let body = {
+            "userId":userId,
+            "status":status,
+            "remark":remark
+        }
+        console.log(body);
+        return this.http.post<RestServiceReferenceModel>(this.baseUrl + '/admin/generateServiceReference', body,{'headers':headers})
+    }
+
+    checkAccountNo(accountNo: number) : Observable<RestOTPTemplate> {
+        let params = new HttpParams().set("accountNo",accountNo.toString());
+        return this.http.get<RestOTPTemplate>(`${this.baseUrl}/login/checkAccountNo`,{params: params});
+    }
+
+    registerForNetBanking(netBanking : InternetBanking) : Observable<RestInternetBanking> {
+        const headers = { 'content-type': 'application/json'}
+        const body=JSON.stringify(netBanking);
+        console.log(body);
+        return this.http.post<RestInternetBanking>(this.baseUrl+'/register/registerInternetBanking', body,{'headers':headers})
     }
 }

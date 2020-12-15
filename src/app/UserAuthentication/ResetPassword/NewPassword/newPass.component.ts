@@ -46,7 +46,8 @@ export class NewPassword {
                 this.restTemplate = data;
                 console.log(data);
                 if (this.restTemplate.status === "success") {
-                    console.log("password updated")
+                    alert('Pasword Updated');
+                    this.route.navigate(['login']);
                 }
                 else {
                     this.error = true;

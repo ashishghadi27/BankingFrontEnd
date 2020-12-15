@@ -7,16 +7,30 @@
     padding: 30px;
     width: 50%;
     border-radius: 5px;
+    background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 input{
-    width: 70%;
-    border: 1px solid #d3d3d3;
-    border-radius: 2px;
+    width: 50%;
+    border: 2px solid #d3d3d3;
+    border-radius: 5px;
     padding: 10px;
 }
 
 .inputHolder{
     margin-bottom: 15px;
+}
+
+*{
+    font-weight: 700;
+}
+
+.container{
+    padding-left: 0;
+    padding-right: 0;
+    min-width: 100%;
+    background-image: url('src/assets/images/login.jpg');
+    margin: 0;
+    background-size: auto; 
 }

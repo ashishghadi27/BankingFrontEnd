@@ -1,76 +1,105 @@
-<h2 style="border:1px solid black;text-align: center;">Register for Internet Banking</h2>
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-	<table style="margin-left: auto;margin-right: auto;">
-		<tr>
-			<td></td>
-		</tr>
-		<tr>
-			<td>Enter Account No. :</td>
-			<td>
-				<input type="text" formControlName="AccountNo"  [ngClass]="{ 'is-invalid': submitted && f.AccountNo.errors }" />
-				<div *ngIf="submitted && f.AccountNo.errors" class="invalid-feedback">
-					<div *ngIf="f.AccountNo.errors.required">Account No. is required</div>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td>Login Password :</td>
-			<td>
-				<input type="password" formControlName="password"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-				<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-					<div *ngIf="f.password.errors.required">Password is required</div>
-					<div *ngIf="f.password.errors.minlength">Password must be > 6 character long</div>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td>Confirm Login Password :</td>
-			<td>
-				<input type="password" formControlName="confirmPassword"  [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
-				<div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-					<div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
-					<div *ngIf="f.confirmPassword.errors.mustMatch">Password should be same as Confirm password</div>
-				</div>
-			</td>
-        </tr>
-        <tr>
-			<td>Login Password :</td>
-			<td>
-				<input type="password" formControlName="tpassword"  [ngClass]="{ 'is-invalid': submitted && f.tpassword.errors }" />
-				<div *ngIf="submitted && f.tpassword.errors" class="invalid-feedback">
-					<div *ngIf="f.tpassword.errors.required">Password is required</div>
-					<div *ngIf="f.tpassword.errors.minlength">Password must be > 6 character long</div>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td>Confirm Login Password :</td>
-			<td>
-				<input type="password" appConfirmEqualValidator="password" formControlName="tconfirmPassword"  [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
-				<div *ngIf="submitted && f.tconfirmPassword.errors" class="invalid-feedback">
-					<div *ngIf="f.tconfirmPassword.errors.required">Confirm Password is required</div>
-					<div *ngIf="f.tconfirmPassword.errors.mustMatch">Password should be same as Confirm password</div>
-				</div>
-			</td>
-        </tr>
-        <tr>
-			<td>Enter OTP :</td>
-			<td>
-				<input type="text" formControlName="lastName"  [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-				<div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-					<div *ngIf="f.lastName.errors.required">Last Name is required</div>
-				</div>
-			</td>
-		</tr>
-		<tr>
-            <td style="padding  : 0px 0px 0px 150px;">
-                <br>
-				<input class="btn btn-success" type="submit" value="Submit">
-			</td>
-		</tr>
-		<tr >
-			<td routerLink="/saving" style="text-align: center;">Don't have and account?</td>
-		</tr>
-	</table>
-</form>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" style="color: white; font-weight: 700;" href="#">Bank Name</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto ">
+        <li class="nav-item active">
+          <a class="nav-link" style="color: white; font-weight: 700;" href="#">Register For Internet Banking <span class="sr-only">(current)</span></a>
+        </li>
 
+      </ul>
+    </div>
+</nav>
+<div class="personaldet">
+	<h3 style="text-align: center; padding: 10px; color: white; font-weight: 700;">Register</h3>
+</div>
+<div *ngIf="!passwordsConfirmed" style="margin-top: 40px;">
+	<form [formGroup]="registerForm" (ngSubmit)="generateOTP()">
+		<table style="margin-left: auto;margin-right: auto;">
+			<tr>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Enter Account No. :</td>
+				<td>
+					<input type="text" [formControl]="AccountNo"/>
+					<span *ngIf="AccountNo.hasError('required') && AccountNo.dirty" class="text-danger"><br>Account Number is required</span>
+                </td>
+			</tr>
+			<tr>
+				<td>Login Password :</td>
+				<td>
+					<input type="password" [formControl]="lpassword" />
+					<span *ngIf="lpassword.hasError('required') && lpassword.dirty" class="text-danger"><br>Login Password is required</span>
+                    <span *ngIf="lpassword.hasError('minlength') && lpassword.dirty" class="text-danger"><br>Login Password should have at least 6 characters</span>
+				</td>
+			</tr>
+			<tr>
+				<td>Confirm Login Password :</td>
+				<td>
+					<input type="password" [formControl]="confirmPassword" />
+					<span *ngIf="confirmPassword.hasError('required') && confirmPassword.dirty" class="text-danger"><br>Confirm Password is required</span>
+                </td>
+			</tr>
+			<tr>
+				<td>Transaction Password :</td>
+				<td>
+					<input type="password" [formControl]="tpassword"  />
+					<span *ngIf="tpassword.hasError('required') && tpassword.dirty" class="text-danger"><br>Transaction Password is required</span>
+                    <span *ngIf="tpassword.hasError('minlength') && tpassword.dirty" class="text-danger"><br>Transaction Password should have at least 6 characters</span>
+				</td>
+			</tr>
+			<tr>
+				<td>Confirm Transaction Password :</td>
+				<td>
+					<input type="password" [formControl]="tconfirmPassword" />
+					<span *ngIf="tconfirmPassword.hasError('required') && tconfirmPassword.dirty" class="text-danger"><br>Confirm Password is required</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span *ngIf="!accountExists" class="text-danger">Account doesn't exist.</span>
+					<span *ngIf="lpmismatch" class="text-danger"><br>Login passwords do match.</span>
+					<span *ngIf="tpmismatch" class="text-danger"><br>Transaction passwords do match.</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding  : 0px 0px 0px 150px;">
+					<br>
+					<input class="btn btn-success" type="submit" value="Generate OTP">
+				</td>
+			</tr>
+				
+		</table>
+		
+	</form>
+	<h4 routerLink="/saving" class="text-danger" style="text-align: center; margin-top: 10px;">Don't have an account? Click Here</h4>
+	<h4 routerLink="/login" class="text-success" style="text-align: center; margin-top: 10px;">Already have an account? Login</h4>
+</div>
+<div *ngIf="passwordsConfirmed">
+	<form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+		<table style="margin-left: auto;margin-right: auto;">
+			<tr>
+				<td>Enter OTP :</td>
+				<td>
+					<input type="text" [formControl]="OTPEntered" />
+					<span *ngIf="OTPEntered.hasError('required') && OTPEntered.dirty" class="text-danger"><br>Confirm Password is required</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span *ngIf="otpmismatch" class="text-danger">OTP doesn't match.</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding  : 0px 0px 0px 150px;">
+					<br>
+					<input class="btn btn-success" type="submit" value="Submit">
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>

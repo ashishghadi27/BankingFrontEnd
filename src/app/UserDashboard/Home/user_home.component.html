@@ -29,8 +29,6 @@
                       <a class="dropdown-item" [routerLink]="['imps']" >IMPS</a>
                       <a class="dropdown-item" [routerLink]="['neft']">NEFT</a>
                       <a class="dropdown-item" [routerLink]="['rtgs']">RTGS</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>
                 <br>
@@ -41,16 +39,23 @@
                 </li>
                 <br>
                 <li class="nav-item">
-                    <a class="nav-link-btn-primary option" (click)="goToChangeTransPass()">
+                    <a class="nav-link-btn-primary option" [routerLink]="['newtransactionpassword']">
                         Change Transaction Password
+                    </a>
+                </li>
+                <br>
+                <li class="nav-item">
+                    <a class="nav-link-btn-primary option" (click)="logout()">
+                        Logout
                     </a>
                 </li>
                 
             </ul>
         </div>
 
-        <div class="col rightpane">
+        <div class="col h-100 rightpane" fxFlex>
             <router-outlet></router-outlet>
         </div>
+        
     </div>
 </div>

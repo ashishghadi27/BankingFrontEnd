@@ -21,14 +21,8 @@ export class ServiceReferencePage{
         
     }
 
-    setProgressBar(percent : number) : void {
-        const elem = document.getElementById("prg");
-        elem.style.width = percent + "%";
-    }
-
-
-
     getServiceReferenceStatus(refNum : HTMLInputElement) {
+        console.log('called');
         this.serviceReferenceNumber = parseInt(refNum.value);
         this.numberNotFound = false;
         if(!this.serviceReferenceNumber) {
@@ -38,21 +32,13 @@ export class ServiceReferencePage{
             this.service.getServiceStatus(this.serviceReferenceNumber).subscribe(results => {
                 this.dataFetched = true;
                 this.accountStatus = results;
-
-                if (this.accountStatus.serviceReference.status=="Not Verified") {
-                    this.progressPercent = 2;
-                    this.statusMessage = "Your documents are being verified.";
-                } else if (this.accountStatus.serviceReference.status=="Under Verification") {
-                    this.progressPercent = 50;
-                    this.statusMessage = "Awaiting admin approval.";
-                } else if (this.accountStatus.serviceReference.status=="Verified") {
-                    this.progressPercent = 100;
-                    this.statusMessage = "Request Approved !";
+                console.log(this.accountStatus);
+                if(this.accountStatus.serviceReference != null){
+                    this.statusMessage = this.accountStatus.serviceReference.status + '. ' + this.accountStatus.serviceReference.remark;
                 }
-
-                this.setProgressBar(this.progressPercent);
-
-
+                else{
+                    this.statusMessage = 'Invalid Service Reference Number';
+                }
             })
         }
     }

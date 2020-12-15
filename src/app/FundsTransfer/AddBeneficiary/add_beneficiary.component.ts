@@ -64,6 +64,7 @@ export class AddBeneficiary{
                 restBeneficiaryTemplate=data;
                 if(restBeneficiaryTemplate.beneficiary != null){
                     console.log("Beneficiary Added");
+                    this.route.navigate(['userDashboard']);
                 }
 
             }

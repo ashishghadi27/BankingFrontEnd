@@ -1,8 +1,7 @@
-html { overflow-y:scroll; }
 
 .container-fluid, .leftpane, .rightpane, .holder{
-    min-height: 100%;
-    overflow: auto;
+    height: 100%;
+    width: 100%;
 }
 
 .option {
@@ -25,5 +24,4 @@ html { overflow-y:scroll; }
 
 .rightpane{
     padding-left: 20px;
-    overflow: auto;
 }

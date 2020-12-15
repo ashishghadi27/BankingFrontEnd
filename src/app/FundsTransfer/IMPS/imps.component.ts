@@ -31,7 +31,7 @@ export class IMPS{
     msg:string;
     balanceCheck:boolean=false;
     userId:number;
-    accNo:string = '1500012';
+    accNo:string;
 
     constructor(private service:MyDataService, formBuilder:FormBuilder,private route:Router, private utilService:DashboardService){
         this.amountControl = new FormControl("", Validators.compose([Validators.required,this.rangeCheck]));
@@ -58,6 +58,7 @@ export class IMPS{
                 this.summary=data;
                 this.account = data.account;
                 this.accNo = data.account.accountNo + "";
+                this.fromAccControl.setValue(this.accNo);
                 this.service.fetchBeneficiary(this.accNo).subscribe(
                     response=> {
                         this.beneficiary = response.beneficiaries;
@@ -92,7 +93,7 @@ export class IMPS{
                            this.service.updateBalance(updatedBalance, accNo).subscribe(
                                 (data)=>{
                                     if(data.message == 'Balance updated'){
-                                        this.route.navigateByUrl('userDashboard/imps/transfer_success/' + restTransactionTemplate.transaction.transactionId);
+                                        this.route.navigateByUrl('userDashboard/transfer_success/' + restTransactionTemplate.transaction.transactionId);
                                     }
                                 }
                             );
@@ -115,11 +116,15 @@ export class IMPS{
     }
    
     rangeCheck(amount:FormControl){
-        if(amount.value > 200000){
+        if(amount.value > 50000){
             return{ 
                 "range": true
             }
         }
+    }
+
+    setBeneAcc(event:any){
+        this.toAccControl.setValue(event.target.value);
     }
 
 }

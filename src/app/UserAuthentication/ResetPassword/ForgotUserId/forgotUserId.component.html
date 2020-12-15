@@ -1,12 +1,7 @@
 <div class="container d-flex h-100">
 
     <div class="maindiv align-self-center">
-        <h3>Forgot UserID</h3>
-
-        <div class=enterheader>
-            <h3>Enter Details</h3>
-        </div>
-
+        <h3 style="margin-bottom: 20px;">Forgot User ID</h3>
         <span class="text-danger" *ngIf="error">{{errormessage}}</span>
         <form [formGroup]="ForgotUserIdForm" (ngSubmit)="checkAccountNo()">
             <div class="inputHolder">
@@ -32,7 +27,5 @@
                 <input class="btn btn-success" type="submit" value="Proceed" />
             </div>
         </form>
-
-        <button (click)=back()>Back</button>
     </div>
 </div>

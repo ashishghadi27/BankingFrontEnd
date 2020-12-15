@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AdminService } from 'src/app/Admin/admin.service';
 import { AuthenticationService } from '../../authentication.service';
 import { RestUserIdAndOtpTemplate } from '../../Model/RestUserIdAndOtpTemplate';
 
@@ -24,7 +25,7 @@ export class ForgotUserId {
   otp: number;
   checkable: boolean = true;
 
-  constructor(public dataService: AuthenticationService, formBuilder: FormBuilder, private route: Router) {
+  constructor(public dataService: AuthenticationService, formBuilder: FormBuilder, private route: Router, private utilService:AdminService) {
     this.accountNoControl = new FormControl("", Validators.required);
     this.otpControl = new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(40)]));
 
@@ -48,6 +49,13 @@ export class ForgotUserId {
         this.otpvisible = true;
         this.otp = this.restTemplate.otp;
         this.userId = this.restTemplate.userId;
+        this.utilService.getUser(this.restTemplate.userId.toString().trim()).subscribe((userData)=>{
+          if(userData.user != null){
+              this.utilService.sendSms("Your OTP is:" + this.restTemplate.otp + "\n Please don't share this OTP.", userData.user.email.trim()).subscribe(
+                  data=>console.log(data)
+              );
+          }
+        } )
         this.checkable = false;
       }
       else {
@@ -61,7 +69,13 @@ export class ForgotUserId {
   checkOtp() {
     let enteredOtp = this.otpControl.value;
     if (enteredOtp == this.otp) {
-      alert("Your User ID is " + this.userId);
+      this.utilService.getUser(this.userId.toString().trim()).subscribe((userData)=>{
+        if(userData.user != null){
+            this.utilService.sendSms("Your User ID is:" + this.userId + "\n Please don't share this User ID.", userData.user.email.trim()).subscribe(
+                data=>console.log(data)
+            );
+        }
+      })
       this.route.navigate(['/login']);
     } else {
       this.error = true;

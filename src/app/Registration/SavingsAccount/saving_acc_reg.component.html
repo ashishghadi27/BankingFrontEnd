@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto ">
         <li class="nav-item active">
-          <a class="nav-link" style="color: white; font-weight: 700;" href="#">Register For Internet Banking <span class="sr-only">(current)</span></a>
+          <a class="nav-link" style="color: white; font-weight: 700;" href="#">Open Savings Account <span class="sr-only">(current)</span></a>
         </li>
 
       </ul>
@@ -18,16 +18,16 @@
 </div>
 <div *ngIf="datafetched">
 	<div>
-	<form [formGroup]="registerForm" (ngSubmit)="register()">
+	<form [formGroup]="registerForm" (ngSubmit)="preRegister()">
 	<div class="row">
 		<div class="col-6" style="padding:0px 0px 0px 400px">
 			<label>Title<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
 		<div class="col-6">
 			<select name="title" (change)="setTitle($event)">
+				<option value="Mr.">Mr.</option>
 				<option value="Ms.">Ms.</option>
 				<option value="Mrs.">Mrs.</option>
-				<option value="Mr.">Mr.</option>
 			</select>
 		</div>
 	</div>
@@ -71,8 +71,10 @@
 		</div>		
 		<div class="col-6">
 			<input type="text" placeholder="Enter Mobile No." name="mobileno" [formControl]="mobileno"/><br>	
-			<span *ngIf="mobileno.errors.required && mobileno.dirty" class="text-danger">Valid Mobile No. required!!</span>
-			<span *ngIf="mobileno.errors.minLength || mobileno.errors.maxlength || mobileno.errors.pattern" class="text-danger">Mobile No. must be of 10 digits!!</span>
+			<!-- <span *ngIf="!mobileno.valid && mobileno.dirty" class="text-danger">Valid Mobile No. required!!</span>
+			<span *ngIf="mobileno.errors.minlength || mobileno.errors.maxlength || mobileno.errors.pattern" class="text-danger">Mobile No. must be of 10 digits!!</span> -->
+			<span *ngIf="mobileno.hasError('required') && mobileno.dirty" class="text-danger">Mobile Number is required</span>
+            <span *ngIf="(mobileno.hasError('minlength') || mobileno.hasError('maxlength')) && mobileno.dirty" class="text-danger">Mobile No. should be of length 10</span>
 			
 		</div>
 	</div>
@@ -143,7 +145,7 @@
 		<div class="col-5" style="padding:0px 0px 0px 400px">
 			<label>State<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
-		<div class="col-5">
+		<div class="col-5" *ngIf="state1Feteched">
 			<select name="Rstate" (change)="selectChangeHandler($event)">
 				<option value="select">--Select--</option>
 				<option *ngFor="let s of restStateTemplate.stateList" [ngValue]="s.stateId" value="{{s.stateId}}">{{s.stateName}}</option>
@@ -155,8 +157,9 @@
 		<div class="col-5" style="padding:0px 0px 0px 400px">
 			<label>City<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
-		<div class="col-5">
-			<select name="Rcity" [disabled]="butDisabled">
+		<div class="col-5" *ngIf="city1Feteched">
+			<select name="Rcity" (change)="setCity1($event)">
+			<!-- <select name="Rcity" [disabled]="butDisabled"> -->
 				<option>--Select--	</option>
 				<option *ngFor="let c of restCityTemplate.cityList" [ngValue]="c.cityId" value="{{c.cityId}}">{{c.cityName}}</option>
 			</select>	
@@ -219,7 +222,7 @@
 		<div class="col-5" style="padding:0px 0px 0px 400px">
 			<label>State<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
-		<div class="col-5">
+		<div class="col-5" *ngIf="state2Feteched">
 			<select name="Pstate" (change)="selectChangeHandlerSecond($event)">
 				<option>--Select--	</option>
 				<option *ngFor="let s of restStateTemplateSecond.stateList"  [ngValue]="s.stateId" value="{{s.stateId}}">{{s.stateName}}</option>
@@ -231,8 +234,9 @@
 		<div class="col-5" style="padding:0px 0px 0px 400px">
 			<label>City<span class="required">*</span></label>&nbsp;&nbsp;&nbsp;
 		</div>		
-		<div class="col-5">
-			<select name="Pcity"  [disabled]="butDisabledTwo">
+		<div class="col-5" *ngIf="city2Feteched">
+			<select name="Rcity" (change)="setCity2($event)">
+			<!-- <select name="Pcity"  [disabled]="butDisabledTwo"> -->
 				<option>--Select--	</option>
 				<option *ngFor="let city of restCityTemplateSecond.cityList" [ngValue]="city.cityId" value="{{city.cityId}}">{{city.cityName}}</option>
 			</select>	
@@ -261,12 +265,12 @@
 		</div>		
 		<div class="col-5">
 			<select name="occ_type" [formControl]="occtype">
-				<option value="Salaried">Salaried</option>
-				<option value="Business">Business</option>
-				<option value="Self-Employed">Self-Employed</option>
-				<option value="Retired">Retired</option>
-				<option value="Housewife">Housewife</option>
-				<option value="Others">Others</option>
+				<option value="Salaried" [ngValue]="Salaried">Salaried</option>
+				<option value="Business" [ngValue]="Business">Business</option>
+				<option value="Self-Employed" [ngValue]="Self-Employed">Self-Employed</option>
+				<option value="Retired" [ngValue]="Retired">Retired</option>
+				<option value="Housewife" [ngValue]="Housewife">Housewife</option>
+				<option value="Others" [ngValue]="Others">Others</option>
 			</select>	
 		</div>
 	</div>
@@ -291,9 +295,9 @@
 		</div>		
 		<div class="col-5">
 			<select name="annualIncome" [formControl]="annualIncome">
-				<option value="less50K">Less than 50K</option>
-						<option value="less1L">Less than 1L</option>
-						<option value="more1L">More than 1L</option>
+				<option value="less50K" [ngValue]="less50K">Less than 50K</option>
+						<option value="less1L" [ngValue]="less1L">Less than 1L</option>
+						<option value="more1L" [ngValue]="more1L">More than 1L</option>
 			</select>	
 		</div>
 	</div>
@@ -301,21 +305,21 @@
 	<div class="row">
 		<div class="col-1"></div>
 		<div class="col-6" style="padding:0px 0px 0px 300px">
-			<input type="checkbox" name="debitEnabled" [formControl]="debitEnabled"/>
+			<input type="checkbox" name="debitEnabled" (click)="setDebit()"/>
 			<label>Do you want a debit card?</label>&nbsp;&nbsp;&nbsp;
 		</div>		
 	</div>
 	<div class="row">
 		<div class="col-1"></div>
 		<div class="col-6" style="padding:0px 0px 0px 300px">
-			<input type="checkbox" name="netBankingEnabled" [formControl]="netBankingEnabled"/>
+			<input type="checkbox" name="netBankingEnabled" (click)="setNetBanking()"/>
 			<label>Opt for netbanking</label>&nbsp;&nbsp;&nbsp;
 		</div>		
 	</div>
 	<div class="row">
 		<div class="col-1"></div>
 		<div class="col-6" style="padding:0px 0px 0px 300px">
-			<input type="checkbox" name="agree" [formControl]="agree"/>
+			<input type="checkbox" name="agree" (click)="setAgree()"/>
 			<label>I agree...</label>&nbsp;&nbsp;&nbsp;
 		</div>		
 	</div>

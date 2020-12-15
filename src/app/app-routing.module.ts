@@ -71,6 +71,17 @@ const routes : Routes = [
                 component:RTGS
             },
             {
+                path:"transfer_success/:id",
+                component:TransferSuccessful
+            },
+            {
+                path:"add_beneficiary/:accNo",
+                component:AddBeneficiary
+            },
+            {
+                path:"newtransactionpassword",
+                component:NewTransactionPassword},
+            {
                 path: "",
                 redirectTo: "accountDetails",
                 pathMatch: "full"
@@ -81,18 +92,13 @@ const routes : Routes = [
     {path:"forgotpassword",component:ForgotPassword},
     {path:"forgotuserid",component:ForgotUserId},
     {path:"newpassword",component:NewPassword},
-    {path:"newtransactionpassword",component:NewTransactionPassword},
-    //registration module component
     {path:"saving",component: SavingAccountRegistration},
     {path:"internetbanking", component: InternetBankingRegistration},
     {path:"fundsTransfer", component: FundsTransferHome},
+    
     {
-        path:"userDashboard/imps/transfer_success/:id",
-        component:TransferSuccessful
-    },
-    {
-        path:"userDashboard/add_beneficiary/:accNo",
-        component:AddBeneficiary
+        path:"accountStatus",
+        component:ServiceReferencePage
     },
     // fallback component mapping
     {path:"**", component:DefaultError}

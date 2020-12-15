@@ -1,9 +1,16 @@
 .header {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 0px;
-    padding-left: 0px;
-    background-color: #EF9A9A;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    padding-right: 20px;
+    padding-left: 20px;
+    color: white;
+    background-color: #D32F2F;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+td {
+    padding: 10px;
+    padding-right: 30px;
 }
 
 h3 {
@@ -11,9 +18,16 @@ h3 {
 }
 
 thead {
-    background-color: #FFCDD2;
+    background-color: #f35151;
+    color: white;
 }
 
 tbody {
-    background-color: #FFEBEE;
+    background-color: #fff;
 }
+
+.mainDiv{
+    height: 100%;
+    background-color: #fff;
+}
+

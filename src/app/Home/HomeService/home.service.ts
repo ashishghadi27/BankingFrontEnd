@@ -8,7 +8,7 @@ import { RestServiceReferenceModel } from "../Models/service-ref-temp.model";
 })
 export class HomeService {
 
-    baseUrl : string = "http://localhost:2798/";
+    baseUrl : string = "http://localhost:2798/RestApiGladiator/";
 
     constructor(private http: HttpClient) {
         

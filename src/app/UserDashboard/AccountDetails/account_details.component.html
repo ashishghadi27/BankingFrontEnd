@@ -41,7 +41,7 @@
         </tr>
         <ng-template #showPerma>
             <tr>
-                <td style="vertical-align: top;">Residential Address :</td>
+                <td style="vertical-align: top;" class="label">Residential Address :</td>
                 <td>{{accountDetails.permanentAddress.line1}}<br>
                     {{accountDetails.permanentAddress.line2}}<br>
                     {{accountDetails.permanentAddress.city.cityName}} - {{accountDetails.permanentAddress.pincode}} <br>
@@ -51,7 +51,7 @@
         </ng-template>
         <hr>
         <tr>
-            <td style="vertical-align: top;">Permanent Address :</td>
+            <td style="vertical-align: top;" class="label">Permanent Address :</td>
             <td>{{accountDetails.permanentAddress.line1}}<br>
                 {{accountDetails.permanentAddress.line2}}<br>
                 {{accountDetails.permanentAddress.city.cityName}} - {{accountDetails.permanentAddress.pincode}} <br>
@@ -60,11 +60,11 @@
         </tr>
         <hr>
         <tr>
-            <td>Occupation Type :</td>
+            <td class="label">Occupation Type :</td>
             <td>{{accountDetails.occupation.occupationType}}</td>
         </tr>
         <tr>
-            <td>Source of Income :</td>
+            <td class="label">Source of Income :</td>
             <td>{{accountDetails.occupation.sourceOfIncome}}</td>
         </tr>
     </table>

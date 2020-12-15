@@ -1,0 +1,19 @@
+.navbar{
+    background-color: #01579B;
+}
+
+*{
+    font-weight: 700;
+}
+
+input{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d3d3d3;
+    margin-bottom: 10px;;
+
+}
+
+.personaldet{
+    background-color: #0288D1;
+}

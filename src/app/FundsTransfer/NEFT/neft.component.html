@@ -1,5 +1,5 @@
 
-<form class="form-horizontal" style="padding-top: 100px; margin-left:30%;" [formGroup]="neftForm">
+<form class="form-horizontal" style="padding-top: 50px; margin-left:20%;" [formGroup]="neftForm">
 
     <div>
         <label style= "margin-left: 10%; font: outline; font-size: 30px; font-style:bold;  border: 4px solid black;padding-left: 0.5px; padding-left: 10px; padding-right: 10px; padding-bottom: 1px;"><strong>Initiate NEFT Payment</strong></label> <br><br>
@@ -7,22 +7,26 @@
 
     <div style="margin-top: 5px; margin-bottom: 10px;">
         <label for="fromAcc" class="control-label col-sm-3" >From Account</label>
-        <input type="text" name="fromAcc" id="senderAccNumber" size="30" [formControl]="fromAccControl"/> 
+        <input type="text" name="fromAcc" id="senderAccNumber" size="30" readonly [formControl]="fromAccControl"/> 
     </div>
 
     <div style="display: inline; margin-top: 10px;"> 
         <label for="toAcc" class="control-label col-sm-3" >To Account</label>
        <!-- <input type="text" id="recieverAccNumber"  size="30" style="margin-right: 5px;" [formControl]="toAccControl"/>-->
-       <select id="recieverAccNumber" [formControl]="toAccControl" size="3" >
+       <select id="recieverAccNumber" (change) = "setBeneAcc($event)">
            <option>Select (If not available add Beneficiary)</option>
            <option *ngFor="let b of beneficiary">{{b.beneficiaryAccNo}}</option>
       </select>
-        <span *ngIf="toAccControl.hasError('required') && toAccControl.dirty" class="text-danger">Account number required</span> 
-        <input type="button" value=" + Add" style="border: 0.5px solid;" (click)="addNew()"/>
+      <br>
+        <div style="margin-left: 25%;">
+            <input type="text"  style="margin-bottom: 15px;" [formControl]="toAccControl" />
+            <span *ngIf="toAccControl.hasError('required') && toAccControl.dirty" class="text-danger">Account number required</span> <br>
+            <input type="button" value=" + Add Beneficiary" style="width: 30%;" class="btn btn-info" (click)="addNew()"/>
+        </div>
     </div>
 
     <div style="margin-top: 10px;" >
-        <label for="ammount" class="control-label col-sm-3">Ammount</label>
+        <label for="ammount" class="control-label col-sm-3">Amount</label>
         <input type="text" id="ammount" name="amount"  size="30" [formControl]="amountControl"/>
         <span *ngIf="amountControl.hasError('range') && amountControl.dirty" class="text-danger">Amount should be more than 200000</span>
     </div>
@@ -47,12 +51,16 @@
     </div> <br>
 
     <div>
-        <input style="margin-left: 5px; border: 0.5px solid;" type="button" id="saveIMPS" value="Save"/>
-        <input  style="margin-left: 5px; border: 0.5px solid;" type="reset" id="resetIMPS" value="Reset"/>
-        <input type="button" id="continueIMPS" value="Continue" style="margin-left: 155px; border: 0.5px solid;" (click)="addTransaction()"/>
+        <input class="btn btn-warning" (click)="addNew()" style="margin-left: 5px; margin-bottom: 5px;" type="button" id="saveIMPS" value="Save"/>
+        <input class="btn btn-danger" style="margin-left: 5px; margin-bottom: 5px; " type="button" id="resetIMPS" value="Reset"/>
+        <input class="btn btn-success" type="button" id="continueIMPS" value="Continue" style="margin-left: 5px;" (click)="addTransaction()"/>
     </div>
 
     <div class="alert alert-danger" *ngIf="balanceCheck">
-    <strong>Danger!</strong> Amount entered is greater than the balance
+    <strong>Low Balance!</strong> Amount entered is greater than the balance
+
+
   </div>
 </form>
+
+

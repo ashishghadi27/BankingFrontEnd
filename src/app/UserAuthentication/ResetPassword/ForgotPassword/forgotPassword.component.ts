@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AdminService } from 'src/app/Admin/admin.service';
+import { UserModel } from 'src/app/Admin/ApproveRequestDashBoard/Models/user.model';
 import { AuthenticationService } from '../../authentication.service';
 import { RestUserIdAndOtpTemplate } from '../../Model/RestUserIdAndOtpTemplate';
 
@@ -23,8 +25,9 @@ export class ForgotPassword {
     id: number;
     otp: number;
     checkable: boolean = true;
+    user:UserModel;
 
-    constructor(public dataService: AuthenticationService, formBuilder: FormBuilder, private route: Router) {
+    constructor(public dataService: AuthenticationService, formBuilder: FormBuilder, private route: Router, private utilService:AdminService) {
         this.userIdControl = new FormControl("", Validators.required);
         this.otpControl = new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(40)]));
 
@@ -47,6 +50,18 @@ export class ForgotPassword {
                 console.log("userId correct");
                 this.otpvisible = true;
                 this.otp = this.restTemplate.otp;
+                this.utilService.getUser(userId).subscribe((userData)=>{
+                    if(userData.user != null){
+                        this.utilService.sendSms("Your OTP is:" + this.restTemplate.otp + "\n Please don't share this OTP.", userData.user.email.trim()).subscribe(
+                            data=>console.log(data)
+                        );
+                    }
+                    else{
+                        this.error = true;
+                        this.errormessage = "Invalid UserID";
+                        this.ForgotPasswordForm.reset();
+                    }
+                })
                 this.id=userId;
                 this.checkable = false;
             }

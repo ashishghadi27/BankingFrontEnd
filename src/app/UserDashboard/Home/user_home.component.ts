@@ -20,4 +20,9 @@ export class UserHome
     goToChangeTransPass(){
         this.route.navigate(['newtransactionpassword'])
     }
+
+    logout(){
+        sessionStorage.removeItem('user');
+        this.route.navigate(['login']);
+    }
 }

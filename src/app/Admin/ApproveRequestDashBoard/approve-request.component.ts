@@ -79,7 +79,7 @@ export class ApproveRequest{
     }
 
     setAddress(addresses:AddressModel[]){
-        if(addresses[0].isPermanent === '1'){
+        if(addresses[0].isPermanent == '1'){
             this.permaAddress = addresses[0];
         }
         else{
@@ -149,7 +149,10 @@ export class ApproveRequest{
                             if(iB.internetBanking.id != null || iB.internetBanking.id != undefined){
                                 this.percent = 80;
                                 this.message = 'Internet Banking Enabled';
-                                this.service.sendSms(iB.internetBanking, this.user.mobileNo);
+                                let messageNew = 'Your Account has been approved. Account No: ' + iB.internetBanking.accountNo + '\n User ID: ' + iB.internetBanking.username + '\nPassword: ' + iB.internetBanking.password +  '\nTransaction Password: ' + iB.internetBanking.transPass + "\n If you have opted for debit card, It will be delivered to you residential address within 5 business days";
+                                this.service.sendSms(messageNew, this.user.email).subscribe(
+                                    data=>console.log(data)
+                                );
                                 if(this.user.debitEnabled == '1'){  
                                     this.service.registerDebitCard(this.createDebitCardObject(accountData.account.accountNo)).subscribe((debitData => {
                                         this.percent = 100;

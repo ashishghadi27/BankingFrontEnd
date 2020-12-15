@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AdminService } from 'src/app/Admin/admin.service';
+import { AuthenticationService } from 'src/app/UserAuthentication/authentication.service';
 import { RestOTPTemplate } from '../Models/rest-otp-template.model';
 import { RegisterService } from '../Services/register.service';
+import { InternetBanking } from './Models/internetbanking.model';
+import { RestInternetBanking } from './Models/rest-internetbanking.model';
 
 @Component({
     selector: 'internet-banking-reg',
@@ -10,113 +15,146 @@ import { RegisterService } from '../Services/register.service';
 })
 
 export class InternetBankingRegistration{
+    
+    registerForm: FormGroup;
+
+    submitted = false;
+    passwordsConfirmed = false;
+
+    AccountNo : FormControl;
+    lpassword : FormControl;
+    confirmPassword : FormControl;
+    tpassword : FormControl;
+    tconfirmPassword : FormControl;
+
+    otpForm : FormGroup;
+    OTPEntered : FormControl;
+
+    accountNo : number;
+    loginPassword : string;
+    confirmLoginPassword : string;
+    transactionPassword : string;
+    confirmTransactionPassword : string;
+
+
+
+    accountExists : boolean = true;
+
+    userId : number;
+    OTPGenerated : number;
+    lpmismatch : boolean = false;
+    tpmismatch : boolean = false;
+    otpmismatch : boolean = false;
+
     ngOnInit() : void{
-        this.getUserId();
+        //this.getUserId();
     }
 
-    constructor(private registerService : RegisterService) {    }
+    constructor(private registerService : RegisterService, formBuilder : FormBuilder, private utilService:AdminService, private authService:AuthenticationService, private route:Router) {  
 
-    accountNo : number = 101;
+        this.AccountNo = new FormControl("",Validators.required);
+        this.lpassword = new FormControl("",Validators.compose([Validators.required, Validators.minLength(6)]));
+        this.confirmPassword = new FormControl("",Validators.compose([Validators.required, Validators.minLength(6)]));
+        this.tpassword = new FormControl("",Validators.compose([Validators.required, Validators.minLength(6)]));
+        this.tconfirmPassword = new FormControl("",Validators.compose([Validators.required, Validators.minLength(6)]));
+
+        this.registerForm = formBuilder.group({
+            "accountNo" : this.AccountNo,
+            "loginPassword" : this.lpassword,
+            "confirmLoginPassword" : this.confirmPassword,
+            "transactionPassword" : this.tpassword,
+            "confirmTransactionPassword" : this.tconfirmPassword
+        })
+
+        this.OTPEntered = new FormControl("",Validators.required);
+
+        this.otpForm = formBuilder.group({
+            "OTPEntered" : this.OTPEntered
+        })
+
+    }
+
     restOTPTemplate : RestOTPTemplate;
 
-    getUserId():void{
-        this.registerService.getUserId(this.accountNo).subscribe(results => {
-            this.restOTPTemplate = results
-            console.log(this.restOTPTemplate.otp);
+    restOTPTemplateTwo : RestOTPTemplate;
+    restRegNetBankingTemp : RestInternetBanking;
+
+    generateOTP() {
+        console.log('called');
+        this.accountNo = Number(this.AccountNo.value);
+        this.loginPassword = this.lpassword.value;
+        this.confirmLoginPassword = this.confirmPassword.value;
+        this.transactionPassword = this.tpassword.value;
+        this.confirmTransactionPassword = this.tconfirmPassword.value;
+
+        this.registerService.checkAccountNo(this.accountNo).subscribe((result) => {
+            this.restOTPTemplateTwo = result;
+            //console.log(this.restOTPTemplateTwo);
+            if (this.restOTPTemplateTwo.userId == null) {
+                this.accountExists = false;
+                return;
+            } else {
+                this.userId = this.restOTPTemplateTwo.userId;
+                this.OTPGenerated = this.restOTPTemplateTwo.otp;
+                
+                this.authService.checkInternetBanking(this.userId).subscribe((iData)=>{
+                    if (this.loginPassword != this.confirmLoginPassword || this.transactionPassword != this.confirmTransactionPassword) {
+                        if (this.loginPassword != this.confirmLoginPassword) {
+                            this.lpmismatch = true;
+                        }
+                        if (this.transactionPassword != this.confirmTransactionPassword) {
+                            this.tpmismatch = true;
+                        }
+                        return;
+                    } else {
+                        this.passwordsConfirmed = true;
+                        if(iData.message != 'Net Banking is Enabled'){
+                            this.utilService.getUser(this.userId + "").subscribe((userData)=>{
+                                if(userData.user != null){
+                                    this.utilService.sendSms("Your OTP is:" + this.restOTPTemplateTwo.otp + "\n Please don't share this OTP.", userData.user.email.trim()).subscribe(
+                                        data=>console.log(data)
+                                    );
+                                }
+                            })
+                        }
+                        else{
+                            alert('Net Banking is Already Enabled. Please Log In');
+                            this.route.navigate(['/login']);
+                        }
+                    }
+    
+                    
+                })
+
+                
             }
-        );
+        })
     }
 
-    registerForm: FormGroup;
-    submitted = false;
-    /*loginForm: FormGroup;
-    accountNoControl: FormControl;
-    passwordControl: FormControl;
-    CpasswordControl: FormControl;
-    TpasswordControl: FormControl;
-    TCpasswordControl: FormControl;
-    OTPControl: FormControl;
-    invalid:boolean = false;
-    
-     constructor(private service:RegisterService, formBuilder : FormBuilder, private route: Router){
-    
-        this.accountNoControl = new FormControl("", Validators.required);
-        this.passwordControl = new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(40)]));
-        this.CpasswordControl = new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(40),this.validateAreEqual.bind(this)]));
-        this.TpasswordControl = new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(40)]));
-        this.TCpasswordControl = new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(40)]));
-        this.OTPControl = new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(40)]));
-    
+    onSubmit() {
+        let otpEntered = Number(this.OTPEntered.value);
+        if (otpEntered != this.OTPGenerated) {
+            this.otpmismatch = true;
+        } else {
+            let netBanking = new InternetBanking(
+                null,
+                this.accountNo,
+                this.userId.toString(),
+                this.loginPassword,
+                this.transactionPassword,
+                50000,
+                1000000,
+                2000000,
+                0
+            )
 
-        this.loginForm = formBuilder.group({
-            "accountNo":this.accountNoControl,
-            "Lpassword":this.passwordControl,
-            "CLpassword":this.CpasswordControl,
-            "Tpassword":this.TpasswordControl,
-            "CTpassword":this.TCpasswordControl,
-        },{
-            validator1: ConfirmedValidator('passwordControl', 'CpasswordControl'),
-            validator2: ConfirmedValidator('TpasswordControl', 'TCpasswordControl')
-        });
-        
-    }
-    /*login(frm:any){
-        this.invalid = false;
-        let accountNo = this.accountNoControl.value;
-        let password = this.passwordControl.value;
-        let Tpassword = this.TpasswordControl.value;
-        let otp = this.OTPControl.value;
-        let restInternetBankingTemplate:RestInternetBanking;
-        //let restOtpTemplate:RestOTPTemplate;
-        
-        this.service.getinternetBanking(accountNo,password,Tpassword).subscribe(
-            (data)=>{
-                restInternetBankingTemplate = data;
-                if(restInternetBankingTemplate.internetBanking != null){// && restOtpTemplate.otp==otp){
-                    console.log("Internet Banking Register Success");
-                    this.route.navigate(['/saving']);
-                }
-                else{
-                    this.invalid = true;
-                }
-            }
-        );
-    }*/
-
-   /* constructor(private formBuilder: FormBuilder) {}
-    ngOnInit() {
-        this.registerForm = this.formBuilder.group(
-          {
-            AccountNo: ["", [Validators.required]],
-            password: ["", [Validators.required, Validators.minLength(6)]],
-            confirmPassword: ["", Validators.compose([Validators.required])],
-            tpassword: ["", [Validators.required, Validators.minLength(6),]],
-            tconfirmPassword: ["", Validators.required],
-            lastName: ["", [Validators.required]],
-          },
-          {
-            // Used custom form validator name
-            //validator: Validators.compose{[[CompareLPasswords("password", "confirmPassword"), PasswordValidation.PasswordRule])},
-            validator: CompareTPasswords("password","confirmPassword"),
-//                       CompareTPasswords("tpassword","tconfirmPassword"),
-          },
-
-        );
-    }
-    
-      // Getter function in order to get form controls value
-      get f() {
-        return this.registerForm.controls;
-      }
-    
-      onSubmit() {
-        this.submitted = true;
-    
-        // Returns false if form is invalid
-        if (this.registerForm.invalid) {
-          return;
+            this.registerService.registerForNetBanking(netBanking).subscribe((res) => {
+                this.restRegNetBankingTemp = res;
+                console.log(this.restRegNetBankingTemp.message);
+                alert('Internet Banking Enabled');
+                this.route.navigate(['/login']);
+            })
         }
-    
-        console.log("Form Values" + JSON.stringify(this.registerForm.value));
-      }*/
+    }
+
 }

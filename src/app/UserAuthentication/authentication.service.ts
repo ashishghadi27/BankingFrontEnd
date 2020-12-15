@@ -61,8 +61,12 @@ export class AuthenticationService{
         return this.http.put<RequestStatus>(apiLink,{}, {params:params})
     }
 
-
-
-
+    setNewTransPassword(accNo:number,password:string): Observable<RequestStatus>{
+        let params = new HttpParams();
+        params = params.append('transPass', password);
+        params = params.append('accountNo', accNo+"");
+        let apiLink:string = "http://localhost:2798/RestApiGladiator/register/setTransPass";
+        return this.http.put<RequestStatus>(apiLink,{}, {params:params})
+    }
 
 }

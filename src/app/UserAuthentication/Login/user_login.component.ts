@@ -78,6 +78,7 @@ export class UserAuth{
       let password = this.passwordControl.value;
       this.dataService.checkLogin(userId, password).subscribe(
         data => {
+          console.log(data);
           if(data.message === 'User Logged In'){
             this.getUser(userId);
           }
