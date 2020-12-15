@@ -1,9 +1,9 @@
-<div *ngIf="dataFetched">
+<div *ngIf="dataFetched" style="min-height: 100%;">
     <div class="header">
         <h3 style="font-weight: 700;">Account Statement</h3>
     </div>
     <br>
-    <div class="first">
+    <div class="first" style="min-height: 100%;">
         <table class="table table-striped">
             <thead class="thead"> 
                 <tr>
@@ -49,6 +49,7 @@
                     <th>Transaction Id</th>
                     <th>Transaction Type</th>
                     <th>Amount</th>
+                    <th>To Account</th>
                     <th>Credit/Debit</th>
                 </tr>
             </thead>
@@ -60,6 +61,7 @@
                     <td>{{transaction.transactionId}}</td>
                     <td>{{transaction.type}}</td>
                     <td>&#x20B9; {{transaction.amount}}</td>
+                    <td> {{transaction.toAccount}}</td>
                     <td>{{transaction.flow}}</td>
                 </tr>
             </tbody>

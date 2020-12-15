@@ -21,6 +21,7 @@
                         <th>Reason</th>
                         <th>Transaction Type</th>
                         <th>Amount</th>
+                        <th>To Account</th>
                         <th>Credit/Debit</th>
                     </tr>
                 </thead>
@@ -30,7 +31,8 @@
                         <td>{{transaction.endDate}}</td>
                         <td>{{transaction.reason}}</td>
                         <td>{{transaction.type}}</td>
-                        <td>{{transaction.amount}}</td>
+                        <td>&#x20B9; {{transaction.amount}}</td>
+                        <td>{{transaction.toAccount}}</td>
                         <td>{{transaction.flow}}</td>
                     </tr>
                 </tbody>

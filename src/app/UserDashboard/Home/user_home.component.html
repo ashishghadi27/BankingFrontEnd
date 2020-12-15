@@ -1,47 +1,55 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-2">
+    <div class="row holder">
+        <div class="col-sm-2 leftpane">
             <ul class="nav flex-column">
                 <br>
                 <li class="nav-item">
-                    <a class="nav-link-btn-primary" [routerLink]="['accountDetails']">
+                    <a class="nav-link-btn-primary option" [routerLink]="['accountDetails']">
                         Account Details
                     </a>
                 </li>
                 <br>
                 <li class="nav-item">
-                    <a class="nav-link-btn-primary" [routerLink]="['accountSummary']">
+                    <a class="nav-link-btn-primary option" [routerLink]="['accountSummary']">
                         Account Summary
                     </a>
                 </li>
                 <br>
                 <li class="nav-item">
-                    <a class="nav-link-btn-primary" [routerLink]="['accountStatement']">
+                    <a class="nav-link-btn-primary option" [routerLink]="['accountStatement']">
                         Account Statement
                     </a>
                 </li>
                 <br>
-                <li class="nav-item">
-                    <a class="nav-link-btn-primary" [routerLink]="">
-                        Fund Transfer
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle option" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Funds Transfer
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" [routerLink]="['imps']" >IMPS</a>
+                      <a class="dropdown-item" [routerLink]="['neft']">NEFT</a>
+                      <a class="dropdown-item" [routerLink]="['rtgs']">RTGS</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
                 </li>
                 <br>
                 <li class="nav-item">
-                    <a class="nav-link-btn-primary" (click)="goToForgotPass()">
+                    <a class="nav-link-btn-primary option" (click)="goToForgotPass()">
                         Change Password
                     </a>
                 </li>
                 <br>
                 <li class="nav-item">
-                    <a class="nav-link-btn-primary" (click)="goToChangeTransPass()">
+                    <a class="nav-link-btn-primary option" (click)="goToChangeTransPass()">
                         Change Transaction Password
                     </a>
                 </li>
+                
             </ul>
         </div>
 
-        <div class="col">
+        <div class="col rightpane">
             <router-outlet></router-outlet>
         </div>
     </div>

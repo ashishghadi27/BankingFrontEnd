@@ -55,10 +55,7 @@ export class AccountDetails{
             }
             console.log(this.accountDetails.user.middleName);
             this.dob = this.toShortFormat(new Date(this.accountDetails.user.dob));
-            
         });  
-
     }
-
     
 }

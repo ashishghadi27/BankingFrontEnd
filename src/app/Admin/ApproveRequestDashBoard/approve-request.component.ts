@@ -149,7 +149,7 @@ export class ApproveRequest{
                             if(iB.internetBanking.id != null || iB.internetBanking.id != undefined){
                                 this.percent = 80;
                                 this.message = 'Internet Banking Enabled';
-                                //this.service.sendSms(iB.internetBanking, this.user.mobileNo);
+                                this.service.sendSms(iB.internetBanking, this.user.mobileNo);
                                 if(this.user.debitEnabled == '1'){  
                                     this.service.registerDebitCard(this.createDebitCardObject(accountData.account.accountNo)).subscribe((debitData => {
                                         this.percent = 100;

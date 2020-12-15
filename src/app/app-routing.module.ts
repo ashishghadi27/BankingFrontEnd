@@ -18,6 +18,12 @@ import { NewTransactionPassword } from "./UserAuthentication/ResetPassword/NewTr
 import { UserAuth } from "./UserAuthentication/Login/user_login.component";
 import { InternetBankingRegistration } from './Registration/InternetBanking/internet_banking_reg.component';
 import { SavingAccountRegistration } from './Registration/SavingsAccount/saving_acc_reg.component';
+import { FundsTransferHome } from "./FundsTransfer/fund-transfer-homepage.component";
+import { IMPS } from "./FundsTransfer/IMPS/imps.component";
+import { NEFT } from "./FundsTransfer/NEFT/neft.component";
+import { RTGS } from "./FundsTransfer/RTGS/rtgs.component";
+import { TransferSuccessful } from "./FundsTransfer/TransferSuccess/transfer_success.component";
+import { AddBeneficiary } from "./FundsTransfer/AddBeneficiary/add_beneficiary.component";
 
 const routes : Routes = [
     // route object: JSON objects
@@ -47,6 +53,22 @@ const routes : Routes = [
                 component: AccountStatement
             },
             {
+                path:"imps",
+                component:IMPS
+            },
+            {
+                path:"neft",
+                component:NEFT
+            },
+            {
+                path:"rtgs",
+                component:RTGS
+            },
+            {
+                path:"rtgs",
+                component:RTGS
+            },
+            {
                 path: "",
                 redirectTo: "accountDetails",
                 pathMatch: "full"
@@ -61,6 +83,15 @@ const routes : Routes = [
     //registration module component
     {path:"saving",component: SavingAccountRegistration},
     {path:"internetbanking", component: InternetBankingRegistration},
+    {path:"fundsTransfer", component: FundsTransferHome},
+    {
+        path:"userDashboard/imps/transfer_success/:id",
+        component:TransferSuccessful
+    },
+    {
+        path:"userDashboard/add_beneficiary/:accNo",
+        component:AddBeneficiary
+    },
     // fallback component mapping
     {path:"**", component:DefaultError}
 ];

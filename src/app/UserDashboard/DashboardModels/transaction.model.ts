@@ -4,6 +4,7 @@ export class Transaction {
     reason : string;
     type : string;
     startDate : Date;
+    toAccount : string;
 
     constructor(transactionId : number,
         accountNo : number,

@@ -24,6 +24,12 @@ import { UserAuth } from './UserAuthentication/Login/user_login.component';
 import { InternetBankingRegistration } from './Registration/InternetBanking/internet_banking_reg.component';
 import { SavingAccountRegistration } from './Registration/SavingsAccount/saving_acc_reg.component';
 import { RegisterService } from './Registration/Services/register.service';
+import { NEFT } from './FundsTransfer/NEFT/neft.component';
+import { IMPS } from './FundsTransfer/IMPS/imps.component';
+import { RTGS } from './FundsTransfer/RTGS/rtgs.component';
+import { FundsTransferHome } from './FundsTransfer/fund-transfer-homepage.component';
+import { TransferSuccessful } from './FundsTransfer/TransferSuccess/transfer_success.component';
+import { AddBeneficiary } from './FundsTransfer/AddBeneficiary/add_beneficiary.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +52,13 @@ import { RegisterService } from './Registration/Services/register.service';
     NewTransactionPassword,
     InternetBankingRegistration,
     SavingAccountRegistration,
-    DefaultError
+    DefaultError,
+    NEFT,
+    IMPS,
+    RTGS,
+    FundsTransferHome,
+    TransferSuccessful,
+    AddBeneficiary
 
   ],
   imports: [
