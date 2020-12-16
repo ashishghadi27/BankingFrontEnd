@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AdminService } from 'src/app/Admin/admin.service';
 import { AddressModel } from 'src/app/Admin/ApproveRequestDashBoard/Models/address.model';
 import { RestServiceReferenceModel } from 'src/app/Home/Models/service-ref-temp.model';
 import { ServiceReference } from 'src/app/Home/Models/service-ref.model';
@@ -71,7 +72,7 @@ export class SavingAccountRegistration{
     netBankingBool:boolean = false;
     agreeBool:boolean= false;
 
-    constructor(private registerService:RegisterService, formBuilder : FormBuilder, private route: Router){
+    constructor(private registerService:RegisterService, formBuilder : FormBuilder, private route: Router, private utilService:AdminService){
     
         this.firstname = new FormControl("", [Validators.required]);
         this.middlename = new FormControl("", [Validators.required]);
@@ -321,7 +322,11 @@ export class SavingAccountRegistration{
             this.registerService.generateServiceReference(this.registeredUserTemp.user.userId + "", this.SerRefStatus, this.SerRefRemark).subscribe(results => {
                 this.restSerRefTemp = results;
                 console.log(this.restSerRefTemp.message)
-                this.route.navigate(['/accountStatus']);
+                this.utilService.sendSms("Your Service Reference Number is:" + this.restSerRefTemp.serviceReference.serviceId + "\n Please don't share this User ID.", this.registeredUserTemp.user.email.trim()).subscribe(
+                    (data)=>{
+                        this.route.navigate(['/accountStatus']);
+                    }
+                );
             })
 
         });

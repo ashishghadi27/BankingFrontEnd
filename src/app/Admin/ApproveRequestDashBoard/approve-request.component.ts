@@ -129,7 +129,7 @@ export class ApproveRequest{
         console.log(this.message);
         let account:AccountModel = new AccountModel();
         account.accountType = 'SAVINGS';
-        account.balance = '0';
+        account.balance = '10000';
         account.branchId = '1';
         account.userId = this.user.userId;
         this.service.createAccount(account).subscribe(accountData => {

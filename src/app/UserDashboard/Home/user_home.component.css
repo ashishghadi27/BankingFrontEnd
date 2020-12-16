@@ -24,4 +24,5 @@
 
 .rightpane{
     padding-left: 20px;
+    overflow: scroll;
 }

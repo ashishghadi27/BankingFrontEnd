@@ -78,7 +78,8 @@ export class CustomerRepresentative{
     }
 
     setAddress(addresses:AddressModel[]){
-        if(addresses[0].isPermanent === '1'){
+        console.log(addresses)
+        if(addresses[0].isPermanent == '1'){
             this.permaAddress = addresses[0];
         }
         else{

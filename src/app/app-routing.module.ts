@@ -25,6 +25,7 @@ import { RTGS } from "./FundsTransfer/RTGS/rtgs.component";
 import { TransferSuccessful } from "./FundsTransfer/TransferSuccess/transfer_success.component";
 import { AddBeneficiary } from "./FundsTransfer/AddBeneficiary/add_beneficiary.component";
 import { ServiceReferencePage } from "./Home/ServiceReferencePage/service_reference.component";
+import { AccountLocked } from "./CommonPages/AccountLocked/accountLocked.component";
 
 const routes : Routes = [
     // route object: JSON objects
@@ -95,6 +96,7 @@ const routes : Routes = [
     {path:"saving",component: SavingAccountRegistration},
     {path:"internetbanking", component: InternetBankingRegistration},
     {path:"fundsTransfer", component: FundsTransferHome},
+    {path:"accountLocked", component: AccountLocked},
     
     {
         path:"accountStatus",

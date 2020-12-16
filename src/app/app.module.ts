@@ -31,6 +31,7 @@ import { FundsTransferHome } from './FundsTransfer/fund-transfer-homepage.compon
 import { TransferSuccessful } from './FundsTransfer/TransferSuccess/transfer_success.component';
 import { AddBeneficiary } from './FundsTransfer/AddBeneficiary/add_beneficiary.component';
 import { ServiceReferencePage } from './Home/ServiceReferencePage/service_reference.component';
+import { AccountLocked } from './CommonPages/AccountLocked/accountLocked.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { ServiceReferencePage } from './Home/ServiceReferencePage/service_refere
     FundsTransferHome,
     TransferSuccessful,
     AddBeneficiary,
-    ServiceReferencePage
+    ServiceReferencePage,
+    AccountLocked
   ],
   imports: [
     BrowserModule,

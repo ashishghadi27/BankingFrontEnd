@@ -23,6 +23,7 @@ export class UserAuth{
     uservalid:boolean;
     netbankingenabledvalid:boolean;
     user:UserModel;
+    count:number = 0;
 
     constructor(public dataService: AuthenticationService,formBuilder : FormBuilder, private route: Router, private service:AdminService){
       
@@ -85,6 +86,11 @@ export class UserAuth{
           else{
             this.error=true;
             this.errormessage="Invalid password";
+            this.count++;
+            if(this.count > 2){
+              this.count = 0;
+              this.route.navigate(['/accountLocked']);
+            }
           }
         }
       );
