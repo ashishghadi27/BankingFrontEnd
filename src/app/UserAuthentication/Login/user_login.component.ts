@@ -94,37 +94,6 @@ export class UserAuth{
           }
         }
       );
-
-      /*this.checkUser(userId);
-      console.log(this.uservalid);
-      if(this.uservalid==true){
-        console.log("userId correct");
-        this.checkInternetBanking(userId);
-        if(this.netbankingenabledvalid==true){
-          console.log("internet banking enabled");
-          this.dataService.checkLogin(userId,password).subscribe((data)=>{
-            this.restSimpleTemplate = data;
-            console.log("in login");
-            console.log(data);
-            if(this.restSimpleTemplate.status==="success"){
-                this.route.navigate(['/userDashboard']);
-            }else{
-                console.log("Invalid password");
-                this.error=true;
-                this.errormessage="Invalid password";
-            }
-          });
-        }
-          else{
-            console.log("internet banking not enabled");
-            this.error=true;
-            this.errormessage="Internet Banking is not enabled for your Account";
-          }
-        }else{
-          console.log("incorrect userid");
-          this.error=true;
-          this.errormessage="Invalid User ID";
-        }*/
     }
 
     saveSession(user:UserModel){

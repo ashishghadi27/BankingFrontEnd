@@ -38,8 +38,9 @@ export class MainAdminDashboard{
         this.service.updateAdminIdAndCid(data.userId + '', admintd.value, cidtd.value).subscribe(data => {
             this.restTemplate = data;
             console.log(this.restTemplate.message);
+            this.getServiceList();
         });
-        this.getServiceList();
+        
     }
 
 

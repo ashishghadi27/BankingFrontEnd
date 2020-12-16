@@ -142,6 +142,10 @@ export class ApproveRequest{
                 else{
                     this.percent = 100;
                     this.message = 'Account Created';
+                    let messageNew = 'Your Account has been created. Account No: ' + accountData.account.accountNo + '. ';
+                                this.service.sendSms(messageNew, this.user.email).subscribe(
+                                    data=>console.log(data)
+                    );
                 }
                 if(this.user.netBankingEnabled == '1'){
                     this.service.enableInternetBanking(accountData.account.accountNo, accountData.account.userId, this.generatePassword()).subscribe(

@@ -45,6 +45,7 @@ export class InternetBankingRegistration{
     lpmismatch : boolean = false;
     tpmismatch : boolean = false;
     otpmismatch : boolean = false;
+    userEmail:string;
 
     ngOnInit() : void{
         //this.getUserId();
@@ -111,6 +112,7 @@ export class InternetBankingRegistration{
                         if(iData.message != 'Net Banking is Enabled'){
                             this.utilService.getUser(this.userId + "").subscribe((userData)=>{
                                 if(userData.user != null){
+                                    this.userEmail = userData.user.email;
                                     this.utilService.sendSms("Your OTP is:" + this.restOTPTemplateTwo.otp + "\n Please don't share this OTP.", userData.user.email.trim()).subscribe(
                                         data=>console.log(data)
                                     );
@@ -152,7 +154,14 @@ export class InternetBankingRegistration{
                 this.restRegNetBankingTemp = res;
                 console.log(this.restRegNetBankingTemp.message);
                 alert('Internet Banking Enabled');
-                this.route.navigate(['/login']);
+                let messageNew = 'Your Account has been approved. Account No: ' + this.restRegNetBankingTemp.internetBanking.accountNo + '\n User ID: ' + this.restRegNetBankingTemp.internetBanking.username + '\nPassword: ' + this.restRegNetBankingTemp.internetBanking.password +  '\nTransaction Password: ' + this.restRegNetBankingTemp.internetBanking.transPass;
+                this.utilService.sendSms(messageNew, this.userEmail.trim()).subscribe(
+                    data=>{
+                            console.log(data);
+                            this.route.navigate(['/login']);
+                    }
+                );
+                
             })
         }
     }
